@@ -1,0 +1,10 @@
+version: "1"
+services:
+    # start the ganache cli container
+    ethereum_base:
+        container_name: ethereum_base
+        build:
+            context: ./ethereum_base
+        # note host:container
+        ports:
+            - 5545:8545
