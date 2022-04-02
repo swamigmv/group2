@@ -5,12 +5,11 @@ LABEL email="swamigmv@gmail.com"
 
 RUN yum -y install git
 
-RUN mkdir /dev/geth_install
+RUN mkdir /home/ethereum
+RUN mkdir /home/ethereum/git_code
 
-RUN cd /dev/geth_install
+WORKDIR /home/ethereum/git_code
 
 RUN git clone https://github.com/swamigmv/ticketing_system.git
-
-RUN git checkout docker_image
 
 CMD ["tail", "-f", "/dev/null"]

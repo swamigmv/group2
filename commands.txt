@@ -1,0 +1,24 @@
+#create image
+docker build -t ethgeth:v1 .
+
+#list all images
+docker image ls
+
+#create instance of the image created above
+docker run -it -d --name ethgethrun ethgeth:v1
+
+#print list of instances - get the container id from here
+docker ps
+
+#login to docker instance
+docker exec -it <container id> bash
+
+
+#stop instance
+docker stop <container id>
+
+#remove instance
+docker rm <container id>
+
+#remove the image
+docker image rm ethgeth:v1
