@@ -3286,7 +3286,11 @@
 											"top": 135,
 											"width": 148.09716796875,
 											"height": 13,
+<<<<<<< HEAD
 											"text": "CustomerStoreInterface"
+=======
+											"text": "CustomerInterface"
+>>>>>>> pinakin
 										},
 										{
 											"_type": "LabelView",
@@ -3595,7 +3599,11 @@
 											"font": "Arial;13;0",
 											"left": 69,
 											"top": 337,
+<<<<<<< HEAD
 											"width": 127.87353515625,
+=======
+											"width": 143.0126953125,
+>>>>>>> pinakin
 											"height": 13,
 											"text": "«interface»"
 										},
@@ -3608,9 +3616,15 @@
 											"font": "Arial;13;1",
 											"left": 69,
 											"top": 352,
+<<<<<<< HEAD
 											"width": 127.87353515625,
 											"height": 13,
 											"text": "AirlineStoreInterface"
+=======
+											"width": 143.0126953125,
+											"height": 13,
+											"text": "BookingAgentInterface"
+>>>>>>> pinakin
 										},
 										{
 											"_type": "LabelView",
@@ -3643,7 +3657,11 @@
 									"font": "Arial;13;0",
 									"left": 64,
 									"top": 332,
+<<<<<<< HEAD
 									"width": 137.87353515625,
+=======
+									"width": 153.0126953125,
+>>>>>>> pinakin
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/7XVKmDdPH8w="
@@ -3670,7 +3688,11 @@
 									"font": "Arial;13;0",
 									"left": 64,
 									"top": 370,
+<<<<<<< HEAD
 									"width": 137.87353515625,
+=======
+									"width": 153.0126953125,
+>>>>>>> pinakin
 									"height": 10
 								},
 								{
@@ -3695,7 +3717,11 @@
 											"font": "Arial;13;0",
 											"left": 69,
 											"top": 385,
+<<<<<<< HEAD
 											"width": 127.87353515625,
+=======
+											"width": 143.0126953125,
+>>>>>>> pinakin
 											"height": 13,
 											"text": "+addFlight()",
 											"horizontalAlignment": 0
@@ -3712,7 +3738,11 @@
 											"font": "Arial;13;0",
 											"left": 69,
 											"top": 400,
+<<<<<<< HEAD
 											"width": 127.87353515625,
+=======
+											"width": 143.0126953125,
+>>>>>>> pinakin
 											"height": 13,
 											"text": "+flightDelayed()",
 											"horizontalAlignment": 0
@@ -3729,7 +3759,11 @@
 											"font": "Arial;13;0",
 											"left": 69,
 											"top": 415,
+<<<<<<< HEAD
 											"width": 127.87353515625,
+=======
+											"width": 143.0126953125,
+>>>>>>> pinakin
 											"height": 13,
 											"text": "+flightCancelled()",
 											"horizontalAlignment": 0
@@ -3746,7 +3780,11 @@
 											"font": "Arial;13;0",
 											"left": 69,
 											"top": 430,
+<<<<<<< HEAD
 											"width": 127.87353515625,
+=======
+											"width": 143.0126953125,
+>>>>>>> pinakin
 											"height": 13,
 											"text": "+flightDeparted()",
 											"horizontalAlignment": 0
@@ -3755,7 +3793,11 @@
 									"font": "Arial;13;0",
 									"left": 64,
 									"top": 380,
+<<<<<<< HEAD
 									"width": 137.87353515625,
+=======
+									"width": 153.0126953125,
+>>>>>>> pinakin
 									"height": 68
 								},
 								{
@@ -3795,7 +3837,11 @@
 							"containerChangeable": true,
 							"left": 64,
 							"top": 332,
+<<<<<<< HEAD
 							"width": 137.87353515625,
+=======
+							"width": 153.0126953125,
+>>>>>>> pinakin
 							"height": 116,
 							"nameCompartment": {
 								"$ref": "AAAAAAF/7XVKmDdOUaE="
@@ -3834,7 +3880,11 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
+<<<<<<< HEAD
 									"left": 275,
+=======
+									"left": 278,
+>>>>>>> pinakin
 									"top": 267,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -3855,7 +3905,11 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
+<<<<<<< HEAD
 									"left": 285,
+=======
+									"left": 289,
+>>>>>>> pinakin
 									"top": 278,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -3876,7 +3930,11 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
+<<<<<<< HEAD
 									"left": 254,
+=======
+									"left": 257,
+>>>>>>> pinakin
 									"top": 246,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -3895,7 +3953,11 @@
 								"$ref": "AAAAAAF/6wP+xyUIiwk="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
 							"points": "337:195;193:331",
+=======
+							"points": "338:195;199:331",
+>>>>>>> pinakin
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF/7XhI1TkJ9eE="
@@ -4988,7 +5050,11 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
+<<<<<<< HEAD
 					"name": "CustomerStoreInterface",
+=======
+					"name": "CustomerInterface",
+>>>>>>> pinakin
 					"stereotype": "interface",
 					"operations": [
 						{
@@ -5023,7 +5089,11 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
+<<<<<<< HEAD
 					"name": "AirlineStoreInterface",
+=======
+					"name": "BookingAgentInterface",
+>>>>>>> pinakin
 					"stereotype": "interface",
 					"operations": [
 						{
