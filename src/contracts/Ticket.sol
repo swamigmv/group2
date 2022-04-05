@@ -10,17 +10,15 @@ import "../libraries/SharedStructs.sol";
  */
 contract Ticket {
 
-    SharedStructs.FlightDetails flightDetails;
-    uint16 ticketNumber;
-    uint256 amount;
-    uint16 numberOfSeats;
+    SharedStructs.TicketData private ticketData;
 
-    constructor(string memory _flightNumber, uint256 _departureDateTime, uint16 _ticketNumber, uint16 _numberOfSeats, uint256 _amount) {
-        flightDetails.flightNumber = _flightNumber;
-        flightDetails.departureDateTime = _departureDateTime;
-        ticketNumber = _ticketNumber;
-        numberOfSeats = _numberOfSeats;
-        amount = _amount;
+    constructor(string memory _flightNumber, uint256 _departureDateTime, uint16 _ticketNumber, uint16 _numberOfSeats, uint256 _amount, address _ticketAgreementAddress) {
+        ticketData.flightDetails.flightNumber = _flightNumber;
+        ticketData.flightDetails.departureDateTime = _departureDateTime;
+        ticketData.ticketNumber = _ticketNumber;
+        ticketData.numberOfSeats = _numberOfSeats;
+        ticketData.amount = _amount;
+        ticketData.ticketAgreementAddress = _ticketAgreementAddress;
     }
 
     function cancel() external pure returns (address) {

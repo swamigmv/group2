@@ -14,7 +14,8 @@ import "./Flight.sol";
  */
 contract TicketStore is CustomerInterface, BookingAgentInterface {   
 
-   mapping(uint256 => mapping(string => Flight)) flights;
+   mapping(uint256 => mapping(string => Flight)) private flights;
+   address private ticketAgreementAddress;
 
    function buyTicket(string memory _flightNumber, uint256 _departureDateTime, uint16 numberOfSeats) override external pure returns (uint16, address) {
       // TODO: Get flight contract from flight collection. Call book ticket method on the flight.
@@ -41,5 +42,9 @@ contract TicketStore is CustomerInterface, BookingAgentInterface {
    
    function flightDeparted(string memory _flightNumber, uint256 _departureDateTime) override external pure returns (bool) {
       return true;
+   }
+
+   function setTicketAgreement(address _ticketAgreementAddress) override external returns (bool) {
+      ticketAgreementAddress = _ticketAgreementAddress;
    }
 }

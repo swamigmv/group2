@@ -20,4 +20,24 @@ library SharedStructs {
         string name;
         address buyerAddress;
     }
+
+    enum TicketStatus {
+        Open,
+        Cancelled,
+        Complete
+    }
+
+    /**
+    * @title TicketData
+    * @dev Structure for the ticket's data
+    */
+    struct TicketData {
+        address ticketAgreementAddress;
+        FlightDetails flightDetails;
+        uint16 ticketNumber;
+        uint256 amount;
+        uint16 numberOfSeats;
+        uint256 cancelledDateTime;
+        TicketStatus status;
+    }
 }

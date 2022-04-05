@@ -12,4 +12,5 @@ interface BookingAgentInterface {
     function flightDelayed(string memory _flightNumber, uint256 _originalDepartureDateTime, uint256 _newDepartureDateTime) external returns (bool);
     function flightCancelled(string memory _flightNumber, uint256 _departureDateTime) external returns (bool);
     function flightDeparted(string memory _flightNumber, uint256 _departureDateTime) external returns (bool);
+    function setTicketAgreement(address ticketAgreementAddress) external returns (bool);
 }
