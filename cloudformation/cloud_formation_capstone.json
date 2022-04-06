@@ -1,0 +1,138 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "GL Capstone project group 2 - EC2 instances",
+  "Parameters": {
+    "InstanceType": {
+      "Description": "WebServer EC2 instance type",
+      "Type": "String",
+      "Default": "t2.micro"
+    },
+    "InstanceAMI": {
+      "Description": "EC2 instance AMI",
+      "Type": "String",
+      "Default": "ami-0c02fb55956c7d316"
+    },
+    "VPCId": {
+      "Description": "Default VPC Id",
+      "Type": "AWS::EC2::VPC::Id",
+      "Default": "vpc-030778e4f2407d0c2"
+    },
+    "KeyPairName1": {
+      "Description": "EC2 KeyPair to enable SSH access to the instance",
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "Default": "ec2_group2_node1"
+    }
+  },
+  "Resources": {
+    "WebServerSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable HTTP ingress",
+        "VpcId": {
+          "Ref": "VPCId"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "EC2InstanceNode1": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "KeyName": "ec2_group2_node1",
+        "ImageId": {
+          "Ref": "InstanceAMI"
+        },
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "WebServerSecurityGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "DeviceIndex": "0"
+          }
+        ],
+        "UserData": {
+            "Fn::Base64": {
+                "Fn::Sub": "#!/bin/bash\nyum update -y\nyum -y install git\ngit clone https://github.com/swamigmv/group2.git"
+
+            }
+        },
+        "Tags": [
+          {
+            "Key": "purpose",
+            "Value": "bnode_creation"
+          }
+        ]
+      }
+    },
+    "EC2InstanceNode2": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "KeyName": "ec2_group2_node1",
+        "ImageId": {
+          "Ref": "InstanceAMI"
+        },
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "WebServerSecurityGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "DeviceIndex": "0"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "purpose",
+            "Value": "mining_nodes"
+          }
+        ]
+      }
+    },
+    "EC2InstanceNode3": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "KeyName": "ec2_group2_node1",
+        "ImageId": {
+          "Ref": "InstanceAMI"
+        },
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "WebServerSecurityGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "DeviceIndex": "0"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "purpose",
+            "Value": "mining_nodes"
+          }
+        ]
+      }
+    }
+  }
+}
