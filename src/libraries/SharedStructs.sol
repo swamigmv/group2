@@ -3,6 +3,18 @@
 pragma solidity 0.8.6;
 
 library SharedStructs {
+
+    /**
+    * @title FlightStatuses
+    * @dev Enum for the flight status
+    */
+    enum FlightStatuses {
+        OnTime,
+        Delayed,
+        InTransit,
+        Completed
+    }
+
     /**
     * @title FlightDetails
     * @dev Structure for the flight details
@@ -21,7 +33,11 @@ library SharedStructs {
         address buyerAddress;
     }
 
-    enum TicketStatus {
+    /**
+    * @title TicketStatuses
+    * @dev Enum for the ticket status
+    */
+    enum TicketStatuses {
         Open,
         Cancelled,
         Complete
@@ -38,6 +54,6 @@ library SharedStructs {
         uint256 amount;
         uint16 numberOfSeats;
         uint256 cancelledDateTime;
-        TicketStatus status;
+        TicketStatuses status;
     }
 }
