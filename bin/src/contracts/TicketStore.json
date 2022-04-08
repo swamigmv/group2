@@ -1,0 +1,1727 @@
+{
+    "contractName": "TicketStore",
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_departureDateTime",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint16",
+                    "name": "numberOfSeats",
+                    "type": "uint16"
+                }
+            ],
+            "name": "buyTicket",
+            "outputs": [
+                {
+                    "internalType": "uint16",
+                    "name": "",
+                    "type": "uint16"
+                },
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_departureDateTime",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint16",
+                    "name": "ticketNumber",
+                    "type": "uint16"
+                }
+            ],
+            "name": "cancelTicket",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_departureDateTime",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint16",
+                    "name": "ticketNumber",
+                    "type": "uint16"
+                }
+            ],
+            "name": "claimRefund",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_departureDateTime",
+                    "type": "uint256"
+                }
+            ],
+            "name": "flightCancelled",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_originalDepartureDateTime",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_newDepartureDateTime",
+                    "type": "uint256"
+                }
+            ],
+            "name": "flightDelayed",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_flightNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_departureDateTime",
+                    "type": "uint256"
+                }
+            ],
+            "name": "flightDeparted",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_ticketAgreementAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "setTicketAgreement",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"numberOfSeats\",\"type\":\"uint16\"}],\"name\":\"buyTicket\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"ticketNumber\",\"type\":\"uint16\"}],\"name\":\"cancelTicket\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"ticketNumber\",\"type\":\"uint16\"}],\"name\":\"claimRefund\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"}],\"name\":\"flightCancelled\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_originalDepartureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_newDepartureDateTime\",\"type\":\"uint256\"}],\"name\":\"flightDelayed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"}],\"name\":\"flightDeparted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_ticketAgreementAddress\",\"type\":\"address\"}],\"name\":\"setTicketAgreement\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Ticket store contract\",\"kind\":\"dev\",\"methods\":{},\"title\":\"TicketStore\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketStore.sol\":\"TicketStore\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/Flight.sol\":{\"keccak256\":\"0x305417ed646e627ca674d87dba4fc180912597f21bea0339d3fee977b4e7f46b\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://1c3d70319ac7fd37d038893bf4dec64992f42439898768f700aae2124f5c789f\",\"dweb:/ipfs/QmVkPnAHWNAQRqrDZcHYonHRTgyfJBA5q5VrPLj3sh8ewt\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/Ticket.sol\":{\"keccak256\":\"0x6d792d9075d97b08a75f5731346c4e64ea70e3e1435da3b03adc26458bf7c4e8\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://1fc8b208346ea86d011b5eb25483fdc1db8ca082151c8335115649c0da2161d2\",\"dweb:/ipfs/QmfZM3pGgk24dKBWc1DohWTaP6gX54FRGNU4xDx4wPiDqJ\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketStore.sol\":{\"keccak256\":\"0xa94ee822760e57594f9138c39cdadfa1c74c334e8ddddbddf06eaaa841d32148\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://803baf1c5ca40c99eb13e1ddeedd8235afb04566323d8eedc1271a5524f796c4\",\"dweb:/ipfs/QmdUt4N7ZBQ7vMR6op5hrWWgfQeXiyo1R5FUfB7irCsdnP\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/BookingAgentInterface.sol\":{\"keccak256\":\"0x14215ae038047faefd3977fcab4970217f9b7cb37209010618273935184b9624\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://46f4821d7f1f41cdef7b216c6e67f77a5a23c6454fdde209a6c52bcaa67cda5b\",\"dweb:/ipfs/QmNqAPoDABGAQn61BRryz6K2yFmopFryG6HV2xDFhDpfm4\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol\":{\"keccak256\":\"0x92bcf8dcd913d8466be250105dfd46c184884d4f7c0bbdf157f7aa0ce8c3a26c\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://db5864e3bafac0d9fbe8ae9221f2e1a6919881f03f60207459a05e6108f604ed\",\"dweb:/ipfs/QmYr2BMm1YqaeU9DWaLK4qR6wb2ZNJjWXJZh2oBdYuVLeb\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol\":{\"keccak256\":\"0xb9a7337ff16caecde1440d1c0153e921feaccd3613f5d58c384769411d6d88eb\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://41f44317f94cf60a5e4134135ed03af565c545e9be6608734d6911ec366b6f56\",\"dweb:/ipfs/QmPuuFVTLmBnZXBDpTVc2RfTRaTXLdaTuNukCXzSVPx2Bk\"]}},\"version\":1}",
+    "bytecode": "608060405234801561001057600080fd5b5061033e806100206000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c8063669326791161005b578063669326791461008257806396182290146100ff578063bdbb5b11146100ff578063d4682e5c1461010d57600080fd5b8063335068da146100825780634bf93486146100ad5780635e3aeb4d146100e8575b600080fd5b6100986100903660046101e3565b600192915050565b60405190151581526020015b60405180910390f35b6100c66100bb366004610228565b600080935093915050565b6040805161ffff90931683526001600160a01b039091166020830152016100a4565b6100986100f636600461028a565b60019392505050565b6100986100f6366004610228565b61009861011b3660046102d8565b600180546001600160a01b0319166001600160a01b0392909216919091179055600090565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016757600080fd5b813567ffffffffffffffff8082111561018257610182610140565b604051601f8301601f19908116603f011681019082821181831017156101aa576101aa610140565b816040528381528660208588010111156101c357600080fd5b836020870160208301376000602085830101528094505050505092915050565b600080604083850312156101f657600080fd5b823567ffffffffffffffff81111561020d57600080fd5b61021985828601610156565b95602094909401359450505050565b60008060006060848603121561023d57600080fd5b833567ffffffffffffffff81111561025457600080fd5b61026086828701610156565b93505060208401359150604084013561ffff8116811461027f57600080fd5b809150509250925092565b60008060006060848603121561029f57600080fd5b833567ffffffffffffffff8111156102b657600080fd5b6102c286828701610156565b9660208601359650604090950135949350505050565b6000602082840312156102ea57600080fd5b81356001600160a01b038116811461030157600080fd5b939250505056fea2646970667358221220ecbabc7e42bb845d636ed7e9fcad2bbd910bcf23243887470e673b9a325a531e64736f6c634300080d0033",
+    "deployedBytecode": "608060405234801561001057600080fd5b506004361061007d5760003560e01c8063669326791161005b578063669326791461008257806396182290146100ff578063bdbb5b11146100ff578063d4682e5c1461010d57600080fd5b8063335068da146100825780634bf93486146100ad5780635e3aeb4d146100e8575b600080fd5b6100986100903660046101e3565b600192915050565b60405190151581526020015b60405180910390f35b6100c66100bb366004610228565b600080935093915050565b6040805161ffff90931683526001600160a01b039091166020830152016100a4565b6100986100f636600461028a565b60019392505050565b6100986100f6366004610228565b61009861011b3660046102d8565b600180546001600160a01b0319166001600160a01b0392909216919091179055600090565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016757600080fd5b813567ffffffffffffffff8082111561018257610182610140565b604051601f8301601f19908116603f011681019082821181831017156101aa576101aa610140565b816040528381528660208588010111156101c357600080fd5b836020870160208301376000602085830101528094505050505092915050565b600080604083850312156101f657600080fd5b823567ffffffffffffffff81111561020d57600080fd5b61021985828601610156565b95602094909401359450505050565b60008060006060848603121561023d57600080fd5b833567ffffffffffffffff81111561025457600080fd5b61026086828701610156565b93505060208401359150604084013561ffff8116811461027f57600080fd5b809150509250925092565b60008060006060848603121561029f57600080fd5b833567ffffffffffffffff8111156102b657600080fd5b6102c286828701610156565b9660208601359650604090950135949350505050565b6000602082840312156102ea57600080fd5b81356001600160a01b038116811461030157600080fd5b939250505056fea2646970667358221220ecbabc7e42bb845d636ed7e9fcad2bbd910bcf23243887470e673b9a325a531e64736f6c634300080d0033",
+    "sourceMap": "332:1697:4:-:0;;;;;;;;;;;;;;;;;;;",
+    "deployedSourceMap": "332:1697:4:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1558:147;;;;;;:::i;:::-;1694:4;1558:147;;;;;;;;1430:14:8;;1423:22;1405:41;;1393:2;1378:18;1558:147:4;;;;;;;;521:284;;;;;;:::i;:::-;651:6;;521:284;;;;;;;;;;;2214:6:8;2202:19;;;2184:38;;-1:-1:-1;;;;;2258:32:8;;;2253:2;2238:18;;2231:60;2157:18;521:284:4;2012:285:8;1367:184:4;;;;;;:::i;:::-;1540:4;1367:184;;;;;;812:277;;;;;;:::i;1868:158::-;;;;;;:::i;:::-;1971:22;:48;;-1:-1:-1;;;;;;1971:48:4;-1:-1:-1;;;;;1971:48:4;;;;;;;;;;-1:-1:-1;;1868:158:4;14:127:8;75:10;70:3;66:20;63:1;56:31;106:4;103:1;96:15;130:4;127:1;120:15;146:719;189:5;242:3;235:4;227:6;223:17;219:27;209:55;;260:1;257;250:12;209:55;296:6;283:20;322:18;359:2;355;352:10;349:36;;;365:18;;:::i;:::-;440:2;434:9;408:2;494:13;;-1:-1:-1;;490:22:8;;;514:2;486:31;482:40;470:53;;;538:18;;;558:22;;;535:46;532:72;;;584:18;;:::i;:::-;624:10;620:2;613:22;659:2;651:6;644:18;705:3;698:4;693:2;685:6;681:15;677:26;674:35;671:55;;;722:1;719;712:12;671:55;786:2;779:4;771:6;767:17;760:4;752:6;748:17;735:54;833:1;826:4;821:2;813:6;809:15;805:26;798:37;853:6;844:15;;;;;;146:719;;;;:::o;870:390::-;948:6;956;1009:2;997:9;988:7;984:23;980:32;977:52;;;1025:1;1022;1015:12;977:52;1065:9;1052:23;1098:18;1090:6;1087:30;1084:50;;;1130:1;1127;1120:12;1084:50;1153;1195:7;1186:6;1175:9;1171:22;1153:50;:::i;:::-;1143:60;1250:2;1235:18;;;;1222:32;;-1:-1:-1;;;;870:390:8:o;1457:550::-;1543:6;1551;1559;1612:2;1600:9;1591:7;1587:23;1583:32;1580:52;;;1628:1;1625;1618:12;1580:52;1668:9;1655:23;1701:18;1693:6;1690:30;1687:50;;;1733:1;1730;1723:12;1687:50;1756;1798:7;1789:6;1778:9;1774:22;1756:50;:::i;:::-;1746:60;;;1853:2;1842:9;1838:18;1825:32;1815:42;;1907:2;1896:9;1892:18;1879:32;1951:6;1944:5;1940:18;1933:5;1930:29;1920:57;;1973:1;1970;1963:12;1920:57;1996:5;1986:15;;;1457:550;;;;;:::o;2302:458::-;2389:6;2397;2405;2458:2;2446:9;2437:7;2433:23;2429:32;2426:52;;;2474:1;2471;2464:12;2426:52;2514:9;2501:23;2547:18;2539:6;2536:30;2533:50;;;2579:1;2576;2569:12;2533:50;2602;2644:7;2635:6;2624:9;2620:22;2602:50;:::i;:::-;2592:60;2699:2;2684:18;;2671:32;;-1:-1:-1;2750:2:8;2735:18;;;2722:32;;2302:458;-1:-1:-1;;;;2302:458:8:o;2765:286::-;2824:6;2877:2;2865:9;2856:7;2852:23;2848:32;2845:52;;;2893:1;2890;2883:12;2845:52;2919:23;;-1:-1:-1;;;;;2971:31:8;;2961:42;;2951:70;;3017:1;3014;3007:12;2951:70;3040:5;2765:286;-1:-1:-1;;;2765:286:8:o",
+    "sourcePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketStore.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.13+commit.abaa5c0e"
+    },
+    "ast": {
+        "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketStore.sol",
+        "exportedSymbols": {
+            "BookingAgentInterface": [
+                422
+            ],
+            "CustomerInterface": [
+                462
+            ],
+            "Flight": [
+                141
+            ],
+            "SharedStructs": [
+                501
+            ],
+            "Ticket": [
+                240
+            ],
+            "TicketStore": [
+                381
+            ]
+        },
+        "id": 382,
+        "license": "UNLICENSED",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 255,
+                "literals": [
+                    "solidity",
+                    ">=",
+                    "0.8",
+                    ".6",
+                    "<",
+                    "0.9",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "42:32:4"
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol",
+                "file": "../libraries/SharedStructs.sol",
+                "id": 256,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 382,
+                "sourceUnit": 502,
+                "src": "78:40:4",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol",
+                "file": "../interfaces/CustomerInterface.sol",
+                "id": 257,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 382,
+                "sourceUnit": 463,
+                "src": "120:45:4",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/BookingAgentInterface.sol",
+                "file": "../interfaces/BookingAgentInterface.sol",
+                "id": 258,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 382,
+                "sourceUnit": 423,
+                "src": "167:49:4",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/Ticket.sol",
+                "file": "./Ticket.sol",
+                "id": 259,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 382,
+                "sourceUnit": 241,
+                "src": "218:22:4",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/Flight.sol",
+                "file": "./Flight.sol",
+                "id": 260,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 382,
+                "sourceUnit": 142,
+                "src": "242:22:4",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": false,
+                "baseContracts": [
+                    {
+                        "baseName": {
+                            "id": 262,
+                            "name": "CustomerInterface",
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 462,
+                            "src": "356:17:4"
+                        },
+                        "id": 263,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "356:17:4"
+                    },
+                    {
+                        "baseName": {
+                            "id": 264,
+                            "name": "BookingAgentInterface",
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 422,
+                            "src": "375:21:4"
+                        },
+                        "id": 265,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "375:21:4"
+                    }
+                ],
+                "canonicalName": "TicketStore",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "documentation": {
+                    "id": 261,
+                    "nodeType": "StructuredDocumentation",
+                    "src": "268:62:4",
+                    "text": " @title TicketStore\n @dev Ticket store contract"
+                },
+                "fullyImplemented": true,
+                "id": 381,
+                "linearizedBaseContracts": [
+                    381,
+                    422,
+                    462
+                ],
+                "name": "TicketStore",
+                "nameLocation": "341:11:4",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "id": 272,
+                        "mutability": "mutable",
+                        "name": "flights",
+                        "nameLocation": "462:7:4",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 381,
+                        "src": "408:61:4",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_string_memory_ptr_$_t_contract$_Flight_$141_$_$",
+                            "typeString": "mapping(uint256 => mapping(string => contract Flight))"
+                        },
+                        "typeName": {
+                            "id": 271,
+                            "keyType": {
+                                "id": 266,
+                                "name": "uint256",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "416:7:4",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                }
+                            },
+                            "nodeType": "Mapping",
+                            "src": "408:45:4",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_string_memory_ptr_$_t_contract$_Flight_$141_$_$",
+                                "typeString": "mapping(uint256 => mapping(string => contract Flight))"
+                            },
+                            "valueType": {
+                                "id": 270,
+                                "keyType": {
+                                    "id": 267,
+                                    "name": "string",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "435:6:4",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_storage_ptr",
+                                        "typeString": "string"
+                                    }
+                                },
+                                "nodeType": "Mapping",
+                                "src": "427:25:4",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_contract$_Flight_$141_$",
+                                    "typeString": "mapping(string => contract Flight)"
+                                },
+                                "valueType": {
+                                    "id": 269,
+                                    "nodeType": "UserDefinedTypeName",
+                                    "pathNode": {
+                                        "id": 268,
+                                        "name": "Flight",
+                                        "nodeType": "IdentifierPath",
+                                        "referencedDeclaration": 141,
+                                        "src": "445:6:4"
+                                    },
+                                    "referencedDeclaration": 141,
+                                    "src": "445:6:4",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_contract$_Flight_$141",
+                                        "typeString": "contract Flight"
+                                    }
+                                }
+                            }
+                        },
+                        "visibility": "private"
+                    },
+                    {
+                        "constant": false,
+                        "id": 274,
+                        "mutability": "mutable",
+                        "name": "ticketAgreementAddress",
+                        "nameLocation": "491:22:4",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 381,
+                        "src": "475:38:4",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                        },
+                        "typeName": {
+                            "id": 273,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "475:7:4",
+                            "stateMutability": "nonpayable",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                            }
+                        },
+                        "visibility": "private"
+                    },
+                    {
+                        "baseFunctions": [
+                            439
+                        ],
+                        "body": {
+                            "id": 295,
+                            "nodeType": "Block",
+                            "src": "668:137:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "components": [
+                                            {
+                                                "hexValue": "30",
+                                                "id": 288,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "number",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "784:1:4",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_rational_0_by_1",
+                                                    "typeString": "int_const 0"
+                                                },
+                                                "value": "0"
+                                            },
+                                            {
+                                                "arguments": [
+                                                    {
+                                                        "hexValue": "30",
+                                                        "id": 291,
+                                                        "isConstant": false,
+                                                        "isLValue": false,
+                                                        "isPure": true,
+                                                        "kind": "number",
+                                                        "lValueRequested": false,
+                                                        "nodeType": "Literal",
+                                                        "src": "795:1:4",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_rational_0_by_1",
+                                                            "typeString": "int_const 0"
+                                                        },
+                                                        "value": "0"
+                                                    }
+                                                ],
+                                                "expression": {
+                                                    "argumentTypes": [
+                                                        {
+                                                            "typeIdentifier": "t_rational_0_by_1",
+                                                            "typeString": "int_const 0"
+                                                        }
+                                                    ],
+                                                    "id": 290,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": true,
+                                                    "lValueRequested": false,
+                                                    "nodeType": "ElementaryTypeNameExpression",
+                                                    "src": "787:7:4",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_type$_t_address_$",
+                                                        "typeString": "type(address)"
+                                                    },
+                                                    "typeName": {
+                                                        "id": 289,
+                                                        "name": "address",
+                                                        "nodeType": "ElementaryTypeName",
+                                                        "src": "787:7:4",
+                                                        "typeDescriptions": {}
+                                                    }
+                                                },
+                                                "id": 292,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "typeConversion",
+                                                "lValueRequested": false,
+                                                "names": [],
+                                                "nodeType": "FunctionCall",
+                                                "src": "787:10:4",
+                                                "tryCall": false,
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            }
+                                        ],
+                                        "id": 293,
+                                        "isConstant": false,
+                                        "isInlineArray": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "lValueRequested": false,
+                                        "nodeType": "TupleExpression",
+                                        "src": "783:15:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$_t_rational_0_by_1_$_t_address_$",
+                                            "typeString": "tuple(int_const 0,address)"
+                                        }
+                                    },
+                                    "functionReturnParameters": 287,
+                                    "id": 294,
+                                    "nodeType": "Return",
+                                    "src": "776:22:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "4bf93486",
+                        "id": 296,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "buyTicket",
+                        "nameLocation": "530:9:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 282,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "619:8:4"
+                        },
+                        "parameters": {
+                            "id": 281,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 276,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "554:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 296,
+                                    "src": "540:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 275,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "540:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 278,
+                                    "mutability": "mutable",
+                                    "name": "_departureDateTime",
+                                    "nameLocation": "577:18:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 296,
+                                    "src": "569:26:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 277,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "569:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 280,
+                                    "mutability": "mutable",
+                                    "name": "numberOfSeats",
+                                    "nameLocation": "604:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 296,
+                                    "src": "597:20:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint16",
+                                        "typeString": "uint16"
+                                    },
+                                    "typeName": {
+                                        "id": 279,
+                                        "name": "uint16",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "597:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint16",
+                                            "typeString": "uint16"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "539:79:4"
+                        },
+                        "returnParameters": {
+                            "id": 287,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 284,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 296,
+                                    "src": "651:6:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint16",
+                                        "typeString": "uint16"
+                                    },
+                                    "typeName": {
+                                        "id": 283,
+                                        "name": "uint16",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "651:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint16",
+                                            "typeString": "uint16"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 286,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 296,
+                                    "src": "659:7:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 285,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "659:7:4",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "650:17:4"
+                        },
+                        "scope": 381,
+                        "src": "521:284:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            450
+                        ],
+                        "body": {
+                            "id": 310,
+                            "nodeType": "Block",
+                            "src": "950:139:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "hexValue": "74727565",
+                                        "id": 308,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "bool",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "1069:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "value": "true"
+                                    },
+                                    "functionReturnParameters": 307,
+                                    "id": 309,
+                                    "nodeType": "Return",
+                                    "src": "1062:11:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "96182290",
+                        "id": 311,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "cancelTicket",
+                        "nameLocation": "821:12:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 304,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "912:8:4"
+                        },
+                        "parameters": {
+                            "id": 303,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 298,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "848:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 311,
+                                    "src": "834:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 297,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "834:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 300,
+                                    "mutability": "mutable",
+                                    "name": "_departureDateTime",
+                                    "nameLocation": "871:18:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 311,
+                                    "src": "863:26:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 299,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "863:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 302,
+                                    "mutability": "mutable",
+                                    "name": "ticketNumber",
+                                    "nameLocation": "898:12:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 311,
+                                    "src": "891:19:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint16",
+                                        "typeString": "uint16"
+                                    },
+                                    "typeName": {
+                                        "id": 301,
+                                        "name": "uint16",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "891:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint16",
+                                            "typeString": "uint16"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "833:78:4"
+                        },
+                        "returnParameters": {
+                            "id": 307,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 306,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 311,
+                                    "src": "944:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 305,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "944:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "943:6:4"
+                        },
+                        "scope": 381,
+                        "src": "812:277:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            461
+                        ],
+                        "body": {
+                            "id": 325,
+                            "nodeType": "Block",
+                            "src": "1233:127:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "hexValue": "74727565",
+                                        "id": 323,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "bool",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "1349:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "value": "true"
+                                    },
+                                    "functionReturnParameters": 322,
+                                    "id": 324,
+                                    "nodeType": "Return",
+                                    "src": "1342:11:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "bdbb5b11",
+                        "id": 326,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "claimRefund",
+                        "nameLocation": "1105:11:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 319,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1195:8:4"
+                        },
+                        "parameters": {
+                            "id": 318,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 313,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "1131:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 326,
+                                    "src": "1117:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 312,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1117:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 315,
+                                    "mutability": "mutable",
+                                    "name": "_departureDateTime",
+                                    "nameLocation": "1154:18:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 326,
+                                    "src": "1146:26:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 314,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1146:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 317,
+                                    "mutability": "mutable",
+                                    "name": "ticketNumber",
+                                    "nameLocation": "1181:12:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 326,
+                                    "src": "1174:19:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint16",
+                                        "typeString": "uint16"
+                                    },
+                                    "typeName": {
+                                        "id": 316,
+                                        "name": "uint16",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1174:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint16",
+                                            "typeString": "uint16"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1116:78:4"
+                        },
+                        "returnParameters": {
+                            "id": 322,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 321,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 326,
+                                    "src": "1227:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 320,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1227:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1226:6:4"
+                        },
+                        "scope": 381,
+                        "src": "1096:264:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            396
+                        ],
+                        "body": {
+                            "id": 340,
+                            "nodeType": "Block",
+                            "src": "1524:27:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "hexValue": "74727565",
+                                        "id": 338,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "bool",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "1540:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "value": "true"
+                                    },
+                                    "functionReturnParameters": 337,
+                                    "id": 339,
+                                    "nodeType": "Return",
+                                    "src": "1533:11:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "5e3aeb4d",
+                        "id": 341,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "flightDelayed",
+                        "nameLocation": "1376:13:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 334,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1486:8:4"
+                        },
+                        "parameters": {
+                            "id": 333,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 328,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "1404:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 341,
+                                    "src": "1390:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 327,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1390:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 330,
+                                    "mutability": "mutable",
+                                    "name": "_originalDepartureDateTime",
+                                    "nameLocation": "1427:26:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 341,
+                                    "src": "1419:34:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 329,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1419:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 332,
+                                    "mutability": "mutable",
+                                    "name": "_newDepartureDateTime",
+                                    "nameLocation": "1463:21:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 341,
+                                    "src": "1455:29:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 331,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1455:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1389:96:4"
+                        },
+                        "returnParameters": {
+                            "id": 337,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 336,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 341,
+                                    "src": "1518:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 335,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1518:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1517:6:4"
+                        },
+                        "scope": 381,
+                        "src": "1367:184:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            405
+                        ],
+                        "body": {
+                            "id": 353,
+                            "nodeType": "Block",
+                            "src": "1678:27:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "hexValue": "74727565",
+                                        "id": 351,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "bool",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "1694:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "value": "true"
+                                    },
+                                    "functionReturnParameters": 350,
+                                    "id": 352,
+                                    "nodeType": "Return",
+                                    "src": "1687:11:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "335068da",
+                        "id": 354,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "flightCancelled",
+                        "nameLocation": "1567:15:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 347,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1640:8:4"
+                        },
+                        "parameters": {
+                            "id": 346,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 343,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "1597:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 354,
+                                    "src": "1583:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 342,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1583:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 345,
+                                    "mutability": "mutable",
+                                    "name": "_departureDateTime",
+                                    "nameLocation": "1620:18:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 354,
+                                    "src": "1612:26:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 344,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1612:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1582:57:4"
+                        },
+                        "returnParameters": {
+                            "id": 350,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 349,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 354,
+                                    "src": "1672:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 348,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1672:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1671:6:4"
+                        },
+                        "scope": 381,
+                        "src": "1558:147:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            414
+                        ],
+                        "body": {
+                            "id": 366,
+                            "nodeType": "Block",
+                            "src": "1834:27:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "hexValue": "74727565",
+                                        "id": 364,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "bool",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "1850:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "value": "true"
+                                    },
+                                    "functionReturnParameters": 363,
+                                    "id": 365,
+                                    "nodeType": "Return",
+                                    "src": "1843:11:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "66932679",
+                        "id": 367,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "flightDeparted",
+                        "nameLocation": "1724:14:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 360,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1796:8:4"
+                        },
+                        "parameters": {
+                            "id": 359,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 356,
+                                    "mutability": "mutable",
+                                    "name": "_flightNumber",
+                                    "nameLocation": "1753:13:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 367,
+                                    "src": "1739:27:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 355,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1739:6:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 358,
+                                    "mutability": "mutable",
+                                    "name": "_departureDateTime",
+                                    "nameLocation": "1776:18:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 367,
+                                    "src": "1768:26:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 357,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1768:7:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1738:57:4"
+                        },
+                        "returnParameters": {
+                            "id": 363,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 362,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 367,
+                                    "src": "1828:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 361,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1828:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1827:6:4"
+                        },
+                        "scope": 381,
+                        "src": "1715:146:4",
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "baseFunctions": [
+                            421
+                        ],
+                        "body": {
+                            "id": 379,
+                            "nodeType": "Block",
+                            "src": "1962:64:4",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "id": 377,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 375,
+                                            "name": "ticketAgreementAddress",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 274,
+                                            "src": "1971:22:4",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "id": 376,
+                                            "name": "_ticketAgreementAddress",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 369,
+                                            "src": "1996:23:4",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "src": "1971:48:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "id": 378,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1971:48:4"
+                                }
+                            ]
+                        },
+                        "functionSelector": "d4682e5c",
+                        "id": 380,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "setTicketAgreement",
+                        "nameLocation": "1877:18:4",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 371,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1929:8:4"
+                        },
+                        "parameters": {
+                            "id": 370,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 369,
+                                    "mutability": "mutable",
+                                    "name": "_ticketAgreementAddress",
+                                    "nameLocation": "1904:23:4",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 380,
+                                    "src": "1896:31:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 368,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1896:7:4",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1895:33:4"
+                        },
+                        "returnParameters": {
+                            "id": 374,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 373,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 380,
+                                    "src": "1956:4:4",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 372,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1956:4:4",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1955:6:4"
+                        },
+                        "scope": 381,
+                        "src": "1868:158:4",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 382,
+                "src": "332:1697:4",
+                "usedErrors": []
+            }
+        ],
+        "src": "42:1987:4"
+    },
+    "functionHashes": {
+        "buyTicket(string,uint256,uint16)": "4bf93486",
+        "cancelTicket(string,uint256,uint16)": "96182290",
+        "claimRefund(string,uint256,uint16)": "bdbb5b11",
+        "flightCancelled(string,uint256)": "335068da",
+        "flightDelayed(string,uint256,uint256)": "5e3aeb4d",
+        "flightDeparted(string,uint256)": "66932679",
+        "setTicketAgreement(address)": "d4682e5c"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "166000",
+            "executionCost": "208",
+            "totalCost": "166208"
+        },
+        "external": {
+            "buyTicket(string,uint256,uint16)": "infinite",
+            "cancelTicket(string,uint256,uint16)": "infinite",
+            "claimRefund(string,uint256,uint16)": "infinite",
+            "flightCancelled(string,uint256)": "infinite",
+            "flightDelayed(string,uint256,uint256)": "infinite",
+            "flightDeparted(string,uint256)": "infinite",
+            "setTicketAgreement(address)": "24648"
+        }
+    }
+}

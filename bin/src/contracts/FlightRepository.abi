@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"string","name":"_flightNumber","type":"string"},{"internalType":"uint256","name":"_departureDate","type":"uint256"}],"name":"getFlightStatus","outputs":[{"internalType":"enum SharedStructs.FlightStatuses","name":"","type":"uint8"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"}]
