@@ -1,0 +1,190 @@
+{
+    "contractName": "TicketAgreementBase",
+    "abi": [
+        {
+            "inputs": [],
+            "name": "settleAccounts",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"settleAccounts\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Ticket agreement contract\",\"kind\":\"dev\",\"methods\":{},\"title\":\"TicketAgreementBase\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketAgreementBase.sol\":\"TicketAgreementBase\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketAgreementBase.sol\":{\"keccak256\":\"0xa4feecd1ead18fa2a9cc17ecbecbd189755f9006cb80030aedeec2c4eb8d4358\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://743a6269d3a053418a8af5d8d3645286c0b3c83f0c25175b36b2bc6416c23502\",\"dweb:/ipfs/QmSZi8sxLGLN9xQKe52wHTQim1ara2wxx8cXh4wAShmvmi\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol\":{\"keccak256\":\"0xb9a7337ff16caecde1440d1c0153e921feaccd3613f5d58c384769411d6d88eb\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://41f44317f94cf60a5e4134135ed03af565c545e9be6608734d6911ec366b6f56\",\"dweb:/ipfs/QmPuuFVTLmBnZXBDpTVc2RfTRaTXLdaTuNukCXzSVPx2Bk\"]}},\"version\":1}",
+    "bytecode": "",
+    "deployedBytecode": "",
+    "sourceMap": "",
+    "deployedSourceMap": "",
+    "sourcePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketAgreementBase.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.13+commit.abaa5c0e"
+    },
+    "ast": {
+        "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/contracts/TicketAgreementBase.sol",
+        "exportedSymbols": {
+            "SharedStructs": [
+                501
+            ],
+            "TicketAgreementBase": [
+                253
+            ]
+        },
+        "id": 254,
+        "license": "UNLICENSED",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 242,
+                "literals": [
+                    "solidity",
+                    ">=",
+                    "0.8",
+                    ".6",
+                    "<",
+                    "0.9",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "42:32:3"
+            },
+            {
+                "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol",
+                "file": "../libraries/SharedStructs.sol",
+                "id": 243,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 254,
+                "sourceUnit": 502,
+                "src": "78:40:3",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": true,
+                "baseContracts": [],
+                "canonicalName": "TicketAgreementBase",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "documentation": {
+                    "id": 244,
+                    "nodeType": "StructuredDocumentation",
+                    "src": "122:74:3",
+                    "text": " @title TicketAgreementBase\n @dev Ticket agreement contract"
+                },
+                "fullyImplemented": false,
+                "id": 253,
+                "linearizedBaseContracts": [
+                    253
+                ],
+                "name": "TicketAgreementBase",
+                "nameLocation": "216:19:3",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "id": 247,
+                        "mutability": "mutable",
+                        "name": "ticketData",
+                        "nameLocation": "282:10:3",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 253,
+                        "src": "249:43:3",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_TicketData_$500_storage",
+                            "typeString": "struct SharedStructs.TicketData"
+                        },
+                        "typeName": {
+                            "id": 246,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                                "id": 245,
+                                "name": "SharedStructs.TicketData",
+                                "nodeType": "IdentifierPath",
+                                "referencedDeclaration": 500,
+                                "src": "249:24:3"
+                            },
+                            "referencedDeclaration": 500,
+                            "src": "249:24:3",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_TicketData_$500_storage_ptr",
+                                "typeString": "struct SharedStructs.TicketData"
+                            }
+                        },
+                        "visibility": "private"
+                    },
+                    {
+                        "functionSelector": "5efabc1b",
+                        "id": 252,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "settleAccounts",
+                        "nameLocation": "310:14:3",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 248,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "324:2:3"
+                        },
+                        "returnParameters": {
+                            "id": 251,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 250,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 252,
+                                    "src": "350:4:3",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 249,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "350:4:3",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "349:6:3"
+                        },
+                        "scope": 253,
+                        "src": "301:55:3",
+                        "stateMutability": "nonpayable",
+                        "virtual": true,
+                        "visibility": "public"
+                    }
+                ],
+                "scope": 254,
+                "src": "198:163:3",
+                "usedErrors": []
+            }
+        ],
+        "src": "42:319:3"
+    },
+    "functionHashes": {
+        "settleAccounts()": "5efabc1b"
+    },
+    "gasEstimates": null
+}
