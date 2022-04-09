@@ -1,3 +1,5 @@
 **/artifacts
 **/bin
 **/bin/src
+bin/*.*
+bin/**/*.*
