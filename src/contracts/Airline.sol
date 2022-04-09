@@ -13,12 +13,19 @@ import {Flight} from "./Flight.sol";
  */
 contract Airline is AirlineInterface {   
 
-   mapping(uint256 => mapping(string => Flight)) private flights;
+   mapping(uint256 => mapping(string => address)) private flights;
    address private ticketAgreementAddress;
 
-   function addFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external override returns (address) {
-      // TODO: Add flight in the mapping.
-      return address(0);
+   function addFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 chargePerSeat) external override returns (address) {
+
+      address flightAddress = flights[originalDepartureDateTime][flightNumber];
+
+      if (flightAddress == address(0)) {
+         Flight flight = new Flight(flightNumber, originalDepartureDateTime, seatingCapacity, chargePerSeat);
+         flightAddress = address(flight);
+      }
+
+      return flightAddress;
    }
 
    function updateFlightDeparture(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 newDepartureDateTime) external override returns (address) {
