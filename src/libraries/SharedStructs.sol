@@ -51,9 +51,18 @@ library SharedStructs {
         address ticketAgreementAddress;
         FlightDetails flightDetails;
         uint16 ticketNumber;
+        Buyer buyer;
         uint256 amount;
         uint16 numberOfSeats;
         uint256 cancelledDateTime;
         TicketStatuses status;
+    }
+
+    struct FlightRecord {
+        string flightNumber;
+        uint256 departureDate;
+        uint256 scheduledDepartureDateTime;
+        uint256 actualDepartureDateTime;
+        FlightStatuses status;
     }
 }

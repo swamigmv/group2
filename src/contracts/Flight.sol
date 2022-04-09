@@ -25,11 +25,11 @@ contract Flight {
         amountPerSeat = _amountPerSeat;
     }
 
-    function bookTicket(string memory _flightNumber, uint _departureDateTime, uint16 _numberOfSeats, address _ticketAgreementAddress) external returns (uint16, address) {
+    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 _numberOfSeats, address _ticketAgreementAddress) external returns (uint16, address) {
         require(_numberOfSeats <= availableCapacity, "No seats available");
         uint256 _billedAmount = _numberOfSeats * amountPerSeat;
         // TODO: Check balance of buyer's wallet. If insufficient then raise error otherwise deduct from buyer's wallet.
-        Ticket ticket = new Ticket(flightDetails.flightNumber, flightDetails.departureDateTime, ++nextTicketNumber, _numberOfSeats, _billedAmount, _ticketAgreementAddress);
+        Ticket ticket = new Ticket(flightDetails.flightNumber, flightDetails.departureDateTime, ++nextTicketNumber, buyer, _numberOfSeats, _billedAmount, _ticketAgreementAddress);
         tickets.push(ticket);
         return (nextTicketNumber, address(ticket));
     }
