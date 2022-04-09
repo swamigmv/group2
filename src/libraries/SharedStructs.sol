@@ -12,7 +12,8 @@ library SharedStructs {
         OnTime,
         Delayed,
         InTransit,
-        Completed
+        Completed,
+        Cancelled
     }
 
     /**
@@ -21,7 +22,9 @@ library SharedStructs {
     */
     struct FlightDetails {
         string flightNumber;
-        uint256 departureDateTime; 
+        uint256 originalDepartureDateTime;
+        uint256 actualDepartureDateTime; 
+        FlightStatuses status;
     }
 
     /**
@@ -40,7 +43,7 @@ library SharedStructs {
     enum TicketStatuses {
         Open,
         Cancelled,
-        Complete
+        Settled
     }
 
     /**
@@ -49,7 +52,7 @@ library SharedStructs {
     */
     struct TicketData {
         address ticketAgreementAddress;
-        FlightDetails flightDetails;
+        address flightAddress;
         uint16 ticketNumber;
         Buyer buyer;
         uint256 amount;
@@ -57,12 +60,5 @@ library SharedStructs {
         uint256 cancelledDateTime;
         TicketStatuses status;
     }
-
-    struct FlightRecord {
-        string flightNumber;
-        uint256 departureDate;
-        uint256 scheduledDepartureDateTime;
-        uint256 actualDepartureDateTime;
-        FlightStatuses status;
-    }
+    
 }

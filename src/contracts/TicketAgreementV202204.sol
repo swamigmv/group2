@@ -12,7 +12,9 @@ contract TicketAgreementV202204 is TicketAgreementBase {
     
     SharedStructs.TicketData private ticketData;
 
-    function settleAccounts() external override returns(bool) {
+    function settleAccounts() external override pure returns(bool) {
+        /* TODO: Apply penelty and refund policies to calculate the amount to be paid to the buyer and to the airline.
+           Then settle both accounts. */
         return true;
     }
 
