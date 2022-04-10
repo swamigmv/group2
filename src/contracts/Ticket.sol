@@ -3,26 +3,39 @@
 pragma solidity >=0.8.6 < 0.9.0;
 
 import "../libraries/SharedStructs.sol";
+import "../interfaces/FlightInterface.sol";
+import "../interfaces/TicketInterface.sol";
 
 /**
  * @title Ticket
  * @dev Ticket contract
  */
-contract Ticket {
+contract Ticket is TicketInterface {
 
     SharedStructs.TicketData private ticketData;
 
-    constructor(string memory _flightNumber, uint256 _departureDateTime, uint16 _ticketNumber, uint16 _numberOfSeats, uint256 _amount, address _ticketAgreementAddress) {
-        ticketData.flightDetails.flightNumber = _flightNumber;
-        ticketData.flightDetails.departureDateTime = _departureDateTime;
-        ticketData.ticketNumber = _ticketNumber;
-        ticketData.numberOfSeats = _numberOfSeats;
-        ticketData.amount = _amount;
-        ticketData.ticketAgreementAddress = _ticketAgreementAddress;
+    constructor(address flightAddress, uint16 ticketNumber, SharedStructs.Buyer memory buyer, uint16 numberOfSeats, uint256 amount, 
+    address ticketAgreementAddress) {
+        ticketData.flightAddress = flightAddress;
+        ticketData.ticketNumber = ticketNumber;
+        ticketData.buyer.name = buyer.name;
+        ticketData.buyer.buyerAddress = buyer.buyerAddress;
+        ticketData.numberOfSeats = numberOfSeats;
+        ticketData.amount = amount;
+        ticketData.ticketAgreementAddress = ticketAgreementAddress;
     }
 
-    function cancel() external pure returns (address) {
-        return address(0);
+    function cancel() external override payable returns (address, string memory) {
+        // TODO: Cancel the ticket.
+        return (address(0), "");
+    }
+    
+    function settleAccounts() external override payable returns (address, string memory) {
+        // TODO: Cancel the ticket.
+        return (address(0), "");
     }
 
+    function getStatus() external override view returns (SharedStructs.TicketStatuses) {
+        return ticketData.status;
+    }
 }

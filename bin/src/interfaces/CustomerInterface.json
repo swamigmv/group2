@@ -5,12 +5,12 @@
             "inputs": [
                 {
                     "internalType": "string",
-                    "name": "_flightNumber",
+                    "name": "flightNumber",
                     "type": "string"
                 },
                 {
                     "internalType": "uint256",
-                    "name": "_departureDateTime",
+                    "name": "departureDateTime",
                     "type": "uint256"
                 },
                 {
@@ -22,14 +22,14 @@
             "name": "buyTicket",
             "outputs": [
                 {
-                    "internalType": "uint16",
-                    "name": "",
-                    "type": "uint16"
-                },
-                {
                     "internalType": "address",
                     "name": "",
                     "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
             "stateMutability": "nonpayable",
@@ -38,63 +38,53 @@
         {
             "inputs": [
                 {
-                    "internalType": "string",
-                    "name": "_flightNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_departureDateTime",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint16",
-                    "name": "ticketNumber",
-                    "type": "uint16"
+                    "internalType": "address",
+                    "name": "ticketAddress",
+                    "type": "address"
                 }
             ],
             "name": "cancelTicket",
             "outputs": [
                 {
-                    "internalType": "bool",
+                    "internalType": "address",
                     "name": "",
-                    "type": "bool"
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
-            "stateMutability": "nonpayable",
+            "stateMutability": "payable",
             "type": "function"
         },
         {
             "inputs": [
                 {
-                    "internalType": "string",
-                    "name": "_flightNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_departureDateTime",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint16",
-                    "name": "ticketNumber",
-                    "type": "uint16"
+                    "internalType": "address",
+                    "name": "ticketAddress",
+                    "type": "address"
                 }
             ],
-            "name": "claimRefund",
+            "name": "settleTicket",
             "outputs": [
                 {
-                    "internalType": "bool",
+                    "internalType": "address",
                     "name": "",
-                    "type": "bool"
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
-            "stateMutability": "nonpayable",
+            "stateMutability": "payable",
             "type": "function"
         }
     ],
-    "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"numberOfSeats\",\"type\":\"uint16\"}],\"name\":\"buyTicket\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"ticketNumber\",\"type\":\"uint16\"}],\"name\":\"cancelTicket\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"ticketNumber\",\"type\":\"uint16\"}],\"name\":\"claimRefund\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface for the customer\",\"kind\":\"dev\",\"methods\":{},\"title\":\"CustomerInterface\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol\":\"CustomerInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol\":{\"keccak256\":\"0x92bcf8dcd913d8466be250105dfd46c184884d4f7c0bbdf157f7aa0ce8c3a26c\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://db5864e3bafac0d9fbe8ae9221f2e1a6919881f03f60207459a05e6108f604ed\",\"dweb:/ipfs/QmYr2BMm1YqaeU9DWaLK4qR6wb2ZNJjWXJZh2oBdYuVLeb\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol\":{\"keccak256\":\"0xb9a7337ff16caecde1440d1c0153e921feaccd3613f5d58c384769411d6d88eb\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://41f44317f94cf60a5e4134135ed03af565c545e9be6608734d6911ec366b6f56\",\"dweb:/ipfs/QmPuuFVTLmBnZXBDpTVc2RfTRaTXLdaTuNukCXzSVPx2Bk\"]}},\"version\":1}",
+    "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"departureDateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"numberOfSeats\",\"type\":\"uint16\"}],\"name\":\"buyTicket\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ticketAddress\",\"type\":\"address\"}],\"name\":\"cancelTicket\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ticketAddress\",\"type\":\"address\"}],\"name\":\"settleTicket\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface for the customer\",\"kind\":\"dev\",\"methods\":{},\"title\":\"CustomerInterface\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol\":\"CustomerInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol\":{\"keccak256\":\"0xd1bab7d32b8200eddebed7b4711252b6e83329a674b658242375fa4333bfdfee\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://577d0761f7222aa2138a90982b23ccce9ca1b7ea215d0d6b5d0e914e9f36c687\",\"dweb:/ipfs/QmcHoQTgQiq8LntqCtneTG7FtvWNgWaPsXxZw5sUnhTwGk\"]},\"c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol\":{\"keccak256\":\"0x4b9ad04e8d04b966204a1a6cc849fe96e7c68041013e9f321d0630a104684cf8\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://23dd81e19995a715c765281dc2e3710fc347e8d4a6ec8e4414a972967a1dc491\",\"dweb:/ipfs/QmeYFBdapHjuaTRuCbApYJX4uj6Rd7ooZ7AGnvvEmnUfqL\"]}},\"version\":1}",
     "bytecode": "",
     "deployedBytecode": "",
     "sourceMap": "",
@@ -108,18 +98,18 @@
         "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/interfaces/CustomerInterface.sol",
         "exportedSymbols": {
             "CustomerInterface": [
-                462
+                881
             ],
             "SharedStructs": [
-                501
+                1001
             ]
         },
-        "id": 463,
+        "id": 882,
         "license": "UNLICENSED",
         "nodeType": "SourceUnit",
         "nodes": [
             {
-                "id": 424,
+                "id": 847,
                 "literals": [
                     "solidity",
                     ">=",
@@ -130,17 +120,17 @@
                     ".0"
                 ],
                 "nodeType": "PragmaDirective",
-                "src": "42:32:6"
+                "src": "42:32:8"
             },
             {
                 "absolutePath": "c:/Users/Vishal.Chawre/Downloads/Capstone-Project/group2/src/libraries/SharedStructs.sol",
                 "file": "../libraries/SharedStructs.sol",
-                "id": 425,
+                "id": 848,
                 "nameLocation": "-1:-1:-1",
                 "nodeType": "ImportDirective",
-                "scope": 463,
-                "sourceUnit": 502,
-                "src": "78:40:6",
+                "scope": 882,
+                "sourceUnit": 1002,
+                "src": "78:40:8",
                 "symbolAliases": [],
                 "unitAlias": ""
             },
@@ -151,53 +141,53 @@
                 "contractDependencies": [],
                 "contractKind": "interface",
                 "documentation": {
-                    "id": 426,
+                    "id": 849,
                     "nodeType": "StructuredDocumentation",
-                    "src": "122:73:6",
+                    "src": "122:73:8",
                     "text": " @title CustomerInterface\n @dev Interface for the customer"
                 },
                 "fullyImplemented": false,
-                "id": 462,
+                "id": 881,
                 "linearizedBaseContracts": [
-                    462
+                    881
                 ],
                 "name": "CustomerInterface",
-                "nameLocation": "207:17:6",
+                "nameLocation": "207:17:8",
                 "nodeType": "ContractDefinition",
                 "nodes": [
                     {
                         "functionSelector": "4bf93486",
-                        "id": 439,
+                        "id": 862,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "buyTicket",
-                        "nameLocation": "241:9:6",
+                        "nameLocation": "241:9:8",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 433,
+                            "id": 856,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 428,
+                                    "id": 851,
                                     "mutability": "mutable",
-                                    "name": "_flightNumber",
-                                    "nameLocation": "265:13:6",
+                                    "name": "flightNumber",
+                                    "nameLocation": "267:12:8",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 439,
-                                    "src": "251:27:6",
+                                    "scope": 862,
+                                    "src": "251:28:8",
                                     "stateVariable": false,
-                                    "storageLocation": "memory",
+                                    "storageLocation": "calldata",
                                     "typeDescriptions": {
-                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeIdentifier": "t_string_calldata_ptr",
                                         "typeString": "string"
                                     },
                                     "typeName": {
-                                        "id": 427,
+                                        "id": 850,
                                         "name": "string",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "251:6:6",
+                                        "src": "251:6:8",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_string_storage_ptr",
                                             "typeString": "string"
@@ -207,13 +197,13 @@
                                 },
                                 {
                                     "constant": false,
-                                    "id": 430,
+                                    "id": 853,
                                     "mutability": "mutable",
-                                    "name": "_departureDateTime",
-                                    "nameLocation": "288:18:6",
+                                    "name": "departureDateTime",
+                                    "nameLocation": "289:17:8",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 439,
-                                    "src": "280:26:6",
+                                    "scope": 862,
+                                    "src": "281:25:8",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -221,10 +211,10 @@
                                         "typeString": "uint256"
                                     },
                                     "typeName": {
-                                        "id": 429,
+                                        "id": 852,
                                         "name": "uint256",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "280:7:6",
+                                        "src": "281:7:8",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_uint256",
                                             "typeString": "uint256"
@@ -234,13 +224,13 @@
                                 },
                                 {
                                     "constant": false,
-                                    "id": 432,
+                                    "id": 855,
                                     "mutability": "mutable",
                                     "name": "numberOfSeats",
-                                    "nameLocation": "315:13:6",
+                                    "nameLocation": "315:13:8",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 439,
-                                    "src": "308:20:6",
+                                    "scope": 862,
+                                    "src": "308:20:8",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -248,10 +238,10 @@
                                         "typeString": "uint16"
                                     },
                                     "typeName": {
-                                        "id": 431,
+                                        "id": 854,
                                         "name": "uint16",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "308:6:6",
+                                        "src": "308:6:8",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_uint16",
                                             "typeString": "uint16"
@@ -260,48 +250,21 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "250:79:6"
+                            "src": "250:79:8"
                         },
                         "returnParameters": {
-                            "id": 438,
+                            "id": 861,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 435,
+                                    "id": 858,
                                     "mutability": "mutable",
                                     "name": "",
                                     "nameLocation": "-1:-1:-1",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 439,
-                                    "src": "348:6:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint16",
-                                        "typeString": "uint16"
-                                    },
-                                    "typeName": {
-                                        "id": 434,
-                                        "name": "uint16",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "348:6:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint16",
-                                            "typeString": "uint16"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                },
-                                {
-                                    "constant": false,
-                                    "id": 437,
-                                    "mutability": "mutable",
-                                    "name": "",
-                                    "nameLocation": "-1:-1:-1",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 439,
-                                    "src": "356:7:6",
+                                    "scope": 862,
+                                    "src": "348:7:8",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -309,10 +272,87 @@
                                         "typeString": "address"
                                     },
                                     "typeName": {
-                                        "id": 436,
+                                        "id": 857,
                                         "name": "address",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "356:7:6",
+                                        "src": "348:7:8",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 860,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 862,
+                                    "src": "357:13:8",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_memory_ptr",
+                                        "typeString": "string"
+                                    },
+                                    "typeName": {
+                                        "id": 859,
+                                        "name": "string",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "357:6:8",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "347:24:8"
+                        },
+                        "scope": 881,
+                        "src": "232:140:8",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "functionSelector": "17b21972",
+                        "id": 871,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "cancelTicket",
+                        "nameLocation": "387:12:8",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 865,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 864,
+                                    "mutability": "mutable",
+                                    "name": "ticketAddress",
+                                    "nameLocation": "408:13:8",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 871,
+                                    "src": "400:21:8",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 863,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "400:7:8",
                                         "stateMutability": "nonpayable",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_address",
@@ -322,36 +362,49 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "347:17:6"
+                            "src": "399:23:8"
                         },
-                        "scope": 462,
-                        "src": "232:133:6",
-                        "stateMutability": "nonpayable",
-                        "virtual": false,
-                        "visibility": "external"
-                    },
-                    {
-                        "functionSelector": "96182290",
-                        "id": 450,
-                        "implemented": false,
-                        "kind": "function",
-                        "modifiers": [],
-                        "name": "cancelTicket",
-                        "nameLocation": "380:12:6",
-                        "nodeType": "FunctionDefinition",
-                        "parameters": {
-                            "id": 446,
+                        "returnParameters": {
+                            "id": 870,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 441,
+                                    "id": 867,
                                     "mutability": "mutable",
-                                    "name": "_flightNumber",
-                                    "nameLocation": "407:13:6",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 450,
-                                    "src": "393:27:6",
+                                    "scope": 871,
+                                    "src": "449:7:8",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 866,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "449:7:8",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 869,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 871,
+                                    "src": "458:13:8",
                                     "stateVariable": false,
                                     "storageLocation": "memory",
                                     "typeDescriptions": {
@@ -359,136 +412,111 @@
                                         "typeString": "string"
                                     },
                                     "typeName": {
-                                        "id": 440,
+                                        "id": 868,
                                         "name": "string",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "393:6:6",
+                                        "src": "458:6:8",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_string_storage_ptr",
                                             "typeString": "string"
                                         }
                                     },
                                     "visibility": "internal"
-                                },
-                                {
-                                    "constant": false,
-                                    "id": 443,
-                                    "mutability": "mutable",
-                                    "name": "_departureDateTime",
-                                    "nameLocation": "430:18:6",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 450,
-                                    "src": "422:26:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    },
-                                    "typeName": {
-                                        "id": 442,
-                                        "name": "uint256",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "422:7:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint256",
-                                            "typeString": "uint256"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                },
-                                {
-                                    "constant": false,
-                                    "id": 445,
-                                    "mutability": "mutable",
-                                    "name": "ticketNumber",
-                                    "nameLocation": "457:12:6",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 450,
-                                    "src": "450:19:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint16",
-                                        "typeString": "uint16"
-                                    },
-                                    "typeName": {
-                                        "id": 444,
-                                        "name": "uint16",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "450:6:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint16",
-                                            "typeString": "uint16"
-                                        }
-                                    },
-                                    "visibility": "internal"
                                 }
                             ],
-                            "src": "392:78:6"
+                            "src": "448:24:8"
                         },
-                        "returnParameters": {
-                            "id": 449,
-                            "nodeType": "ParameterList",
-                            "parameters": [
-                                {
-                                    "constant": false,
-                                    "id": 448,
-                                    "mutability": "mutable",
-                                    "name": "",
-                                    "nameLocation": "-1:-1:-1",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 450,
-                                    "src": "489:4:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_bool",
-                                        "typeString": "bool"
-                                    },
-                                    "typeName": {
-                                        "id": 447,
-                                        "name": "bool",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "489:4:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_bool",
-                                            "typeString": "bool"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                }
-                            ],
-                            "src": "488:6:6"
-                        },
-                        "scope": 462,
-                        "src": "371:124:6",
-                        "stateMutability": "nonpayable",
+                        "scope": 881,
+                        "src": "378:95:8",
+                        "stateMutability": "payable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
-                        "functionSelector": "bdbb5b11",
-                        "id": 461,
+                        "functionSelector": "6ea17a9b",
+                        "id": 880,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
-                        "name": "claimRefund",
-                        "nameLocation": "510:11:6",
+                        "name": "settleTicket",
+                        "nameLocation": "488:12:8",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 457,
+                            "id": 874,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 452,
+                                    "id": 873,
                                     "mutability": "mutable",
-                                    "name": "_flightNumber",
-                                    "nameLocation": "536:13:6",
+                                    "name": "ticketAddress",
+                                    "nameLocation": "509:13:8",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 461,
-                                    "src": "522:27:6",
+                                    "scope": 880,
+                                    "src": "501:21:8",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 872,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "501:7:8",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "500:23:8"
+                        },
+                        "returnParameters": {
+                            "id": 879,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 876,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 880,
+                                    "src": "550:7:8",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 875,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "550:7:8",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 878,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 880,
+                                    "src": "559:13:8",
                                     "stateVariable": false,
                                     "storageLocation": "memory",
                                     "typeDescriptions": {
@@ -496,126 +524,38 @@
                                         "typeString": "string"
                                     },
                                     "typeName": {
-                                        "id": 451,
+                                        "id": 877,
                                         "name": "string",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "522:6:6",
+                                        "src": "559:6:8",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_string_storage_ptr",
                                             "typeString": "string"
                                         }
                                     },
                                     "visibility": "internal"
-                                },
-                                {
-                                    "constant": false,
-                                    "id": 454,
-                                    "mutability": "mutable",
-                                    "name": "_departureDateTime",
-                                    "nameLocation": "559:18:6",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 461,
-                                    "src": "551:26:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    },
-                                    "typeName": {
-                                        "id": 453,
-                                        "name": "uint256",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "551:7:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint256",
-                                            "typeString": "uint256"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                },
-                                {
-                                    "constant": false,
-                                    "id": 456,
-                                    "mutability": "mutable",
-                                    "name": "ticketNumber",
-                                    "nameLocation": "586:12:6",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 461,
-                                    "src": "579:19:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint16",
-                                        "typeString": "uint16"
-                                    },
-                                    "typeName": {
-                                        "id": 455,
-                                        "name": "uint16",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "579:6:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint16",
-                                            "typeString": "uint16"
-                                        }
-                                    },
-                                    "visibility": "internal"
                                 }
                             ],
-                            "src": "521:78:6"
+                            "src": "549:24:8"
                         },
-                        "returnParameters": {
-                            "id": 460,
-                            "nodeType": "ParameterList",
-                            "parameters": [
-                                {
-                                    "constant": false,
-                                    "id": 459,
-                                    "mutability": "mutable",
-                                    "name": "",
-                                    "nameLocation": "-1:-1:-1",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 461,
-                                    "src": "618:4:6",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_bool",
-                                        "typeString": "bool"
-                                    },
-                                    "typeName": {
-                                        "id": 458,
-                                        "name": "bool",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "618:4:6",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_bool",
-                                            "typeString": "bool"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                }
-                            ],
-                            "src": "617:6:6"
-                        },
-                        "scope": 462,
-                        "src": "501:123:6",
-                        "stateMutability": "nonpayable",
+                        "scope": 881,
+                        "src": "479:95:8",
+                        "stateMutability": "payable",
                         "virtual": false,
                         "visibility": "external"
                     }
                 ],
-                "scope": 463,
-                "src": "197:430:6",
+                "scope": 882,
+                "src": "197:380:8",
                 "usedErrors": []
             }
         ],
-        "src": "42:585:6"
+        "src": "42:535:8"
     },
     "functionHashes": {
         "buyTicket(string,uint256,uint16)": "4bf93486",
-        "cancelTicket(string,uint256,uint16)": "96182290",
-        "claimRefund(string,uint256,uint16)": "bdbb5b11"
+        "cancelTicket(address)": "17b21972",
+        "settleTicket(address)": "6ea17a9b"
     },
     "gasEstimates": null
 }
