@@ -51,7 +51,7 @@ library SharedStructs {
     * @dev Structure for the ticket's data
     */
     struct TicketData {
-        address ticketAgreementAddress;
+        address payable ticketAgreementAddress;
         address flightAddress;
         uint16 ticketNumber;
         Buyer buyer;

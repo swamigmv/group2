@@ -11,10 +11,15 @@ import {Flight} from "./Flight.sol";
  * @title TicketStore
  * @dev Ticket store contract
  */
-contract Airline is AirlineInterface {   
+contract Airline is AirlineInterface {
 
    mapping(uint256 => mapping(string => address)) private flights;
-   address private ticketAgreementAddress;
+   address payable private ticketAgreementAddress;
+   address private ownerAddress;
+
+    constructor() payable {
+        ownerAddress = msg.sender;
+    }
 
    function addFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 chargePerSeat) external override returns (address) {
 
@@ -23,33 +28,60 @@ contract Airline is AirlineInterface {
       if (flightAddress == address(0)) {
          Flight flight = new Flight(flightNumber, originalDepartureDateTime, seatingCapacity, chargePerSeat);
          flightAddress = address(flight);
+         flights[originalDepartureDateTime][flightNumber] = flightAddress;
       }
 
       return flightAddress;
    }
 
-   function updateFlightDeparture(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 newDepartureDateTime) external override returns (address) {
-      // TODO: Get the flight object from the mapping and update the flight departure.
-      return address(0);
+   function updateFlightDeparture(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 newDepartureDateTime) external override returns (address, string memory) {
+      address flightAddress = flights[originalDepartureDateTime][flightNumber];
+      string memory message;
+
+      if (flightAddress != address(0)) {
+         FlightInterface flight = FlightInterface(flightAddress);
+         flight.updateDeparture(newDepartureDateTime);
+      } else {
+         message = "Flight not found.";
+      }
+
+      return (flightAddress, message);
    }
 
-   function cancelFlight(string calldata flightNumber, uint256 departureDateTime) external override returns (address) {
-      // TODO: Get the flight object from the mapping and cancel the flight.
-      return address(0);
+   function cancelFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external override returns (address, string memory) {
+      address flightAddress = flights[originalDepartureDateTime][flightNumber];
+      string memory message;
+
+      if (flightAddress != address(0)) {
+         FlightInterface flight = FlightInterface(flightAddress);
+         flight.cancel();
+      } else {
+         message = "Flight not found.";
+      }
+
+      return (flightAddress, message);
    }
 
-   function completeFlight(string calldata flightNumber, uint256 departureDateTime) external override returns (address) {
-      // TODO: Get the flight object from the mapping and complete the flight.
-      return address(0);
+   function completeFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external override returns (address, string memory) {
+      address flightAddress = flights[originalDepartureDateTime][flightNumber];
+      string memory message;
+
+      if (flightAddress != address(0)) {
+         FlightInterface flight = FlightInterface(flightAddress);
+         flight.complete();
+      } else {
+         message = "Flight not found.";
+      }
+
+      return (flightAddress, message);
    }
 
-   function setTicketAgreement(address ticketAgreementContractAddress) external override returns (bool){
+   function setTicketAgreement(address payable ticketAgreementContractAddress) external override returns (bool){
       ticketAgreementAddress = ticketAgreementContractAddress;
       return true;
    }
 
-   function bookTicket(string calldata flightNumber, uint256 originalDepartureDateTime) external override returns (address){
-      // TODO: Get the flight object from the mapping and complete the flight.
-      return address(0);
+   function getFlightAddress(string calldata flightNumber, uint256 originalDepartureDateTime) external override view returns (address, address payable) {
+       return (flights[originalDepartureDateTime][flightNumber], ticketAgreementAddress);
    }
 }

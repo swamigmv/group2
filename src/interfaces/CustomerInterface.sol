@@ -9,7 +9,9 @@ import "../libraries/SharedStructs.sol";
  * @dev Interface for the customer
  */
 interface CustomerInterface {
-    function buyTicket(string calldata flightNumber, uint256 departureDateTime, uint16 numberOfSeats) external returns (address, string memory);
+    function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) 
+        external payable returns (uint16, address, string memory);
     function cancelTicket(address ticketAddress) external payable returns (address, string memory);
     function settleTicket(address ticketAddress) external payable returns (address, string memory);
+    function setAirline(address airlineAddress) external returns (bool);
 }
