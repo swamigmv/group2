@@ -24,19 +24,25 @@ contract Customer is CustomerInterface {
 
     function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) external override 
     payable returns (uint16, address, string memory) {
-        
+        uint16 ticketNumber;
+        address ticketAddress;
+        string memory message;
+
         (address flightAddress, address payable ticketAgreementAddress) = airline.getFlightAddress(flightNumber, departureDateTime);
 
         // Confirm that flight is found.
-        require(flightAddress != address(0), "Specified flight is not available for the booking.");
+        if (flightAddress == address(0)) {
+            message = "Specified flight is not available for the booking.";
+        } else {
+            FlightInterface flight = FlightInterface(payable(flightAddress));
 
-        FlightInterface flight = FlightInterface(payable(flightAddress));
+            SharedStructs.Buyer memory buyer;
+            buyer.name = buyerName;
+            buyer.buyerAddress = tx.origin;
+            (ticketNumber, ticketAddress, message) = flight.bookTicket(buyer, numberOfSeats, ticketAgreementAddress);
+        }
 
-        SharedStructs.Buyer memory buyer;
-        buyer.name = buyerName;
-        buyer.buyerAddress = tx.origin;
-
-        return flight.bookTicket(buyer, numberOfSeats, ticketAgreementAddress);
+        return (ticketNumber, ticketAddress, message);
 
     }
 
