@@ -12,11 +12,7 @@
       "Type": "String",
       "Default": "ami-0c02fb55956c7d316"
     },
-    "VPCId": {
-      "Description": "Default VPC Id",
-      "Type": "AWS::EC2::VPC::Id",
-      "Default": "vpc-030778e4f2407d0c2"
-    },
+
     "KeyPairName1": {
       "Description": "EC2 KeyPair to enable SSH access to the instance",
       "Type": "AWS::EC2::KeyPair::KeyName",
@@ -24,12 +20,79 @@
     }
   },
   "Resources": {
-    "WebServerSecurityGroup": {
+    "InternetGateway" : {
+      "Type" : "AWS::EC2::InternetGateway",
+      "Properties" : {
+        "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"}]
+      }
+    },
+    "VpcPrivate" : {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "190.0.0.0/24",
+        "Tags": [
+          {
+            "Key": "stack",
+            "Value": "private"
+          }
+        ]
+      }
+    },
+    "subnetPrivate" : {
+       "Type" : "AWS::EC2::Subnet",
+       "Properties" : {
+          "VpcId" : { "Ref" : "VpcPrivate" },
+          "CidrBlock" : "190.0.0.0/24",
+          "Tags" : [ { "Key" : "stack", "Value" : "production" } ]
+       }
+    },
+    "VpcPublic" : {
+       "Type" : "AWS::EC2::VPC",
+       "Properties" : {
+          "CidrBlock" : "191.0.0.0/24",
+          "Tags" : [
+             {"Key" : "stack", "Value" : "public"}
+          ]
+       }
+    },
+    "subnetPublic" : {
+       "Type" : "AWS::EC2::Subnet",
+       "Properties" : {
+          "VpcId" : { "Ref" : "VpcPublic" },
+          "CidrBlock" : "191.0.0.0/24",
+          "Tags" : [ { "Key" : "stack", "Value" : "production" } ]
+       }
+    },
+    "RouteTable" : {
+       "Type" : "AWS::EC2::RouteTable",
+       "Properties" : {
+          "VpcId" : { "Ref" : "VpcPublic" },
+          "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+       }
+    },
+    "InternetGateWayRoute": {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+          "RouteTableId" : { "Ref" : "RouteTable" },
+          "DestinationCidrBlock" : "0.0.0.0/0",
+          "GatewayId" : { "Ref" : "InternetGateway" },
+          "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+       }
+    },
+    "AttachGateway" : {
+       "Type" : "AWS::EC2::VPCGatewayAttachment",
+       "Properties" : {
+          "VpcId" : { "Ref" : "VpcPublic" },
+          "InternetGatewayId" : { "Ref" : "InternetGateway" },
+          "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+        }
+    },
+    "WebServerSecurityGroupPublic": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
         "GroupDescription": "Enable HTTP ingress",
         "VpcId": {
-          "Ref": "VPCId"
+          "Ref": "VpcPublic"
         },
         "SecurityGroupIngress": [
           {
@@ -38,10 +101,28 @@
             "ToPort": "22",
             "CidrIp": "0.0.0.0/0"
           }
+        ],
+        "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+      }
+    },
+    "WebServerSecurityGroupPrivate": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable HTTP ingress",
+        "VpcId": {
+          "Ref": "VpcPrivate"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22",
+            "CidrIp": "191.0.0.0/16"
+          }
         ]
       }
     },
-    "EC2InstanceNode1": {
+    "EC2InstanceNodePublic1": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "InstanceType": {
@@ -55,16 +136,17 @@
           {
             "GroupSet": [
               {
-                "Ref": "WebServerSecurityGroup"
+                "Ref": "WebServerSecurityGroupPublic"
               }
             ],
+            "SubnetId": {"Ref": "subnetPublic"},
             "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0"
           }
         ],
         "UserData": {
             "Fn::Base64": {
-                "Fn::Sub": "#!/bin/bash\nyum update -y\nyum -y install git\ngit clone https://github.com/swamigmv/group2.git"
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod 755 /home/ec2-user/group2/geth/geth\nmkdir -p /home/ec2-user/node1\nmkdir -p /home/ec2-user/node2\ncat << 'EOF' > /home/ec2-user/node1/pwd.txt\nnode1\nEOF\ncat << 'EOF' > /home/ec2-user/node2/pwd.txt\nnode2\nEOF\ncd /home/ec2-user/node1\ngeth --datadir ./data account new  --password /home/ec2-user/node1/pwd.txt\ncd /home/ec2-user/node2\ngeth --datadir ./data account new --password /home/ec2-user/node2/pwd.txt\n"
 
             }
         },
@@ -76,7 +158,7 @@
         ]
       }
     },
-    "EC2InstanceNode2": {
+    "EC2InstanceNodePublic2": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "InstanceType": {
@@ -90,13 +172,20 @@
           {
             "GroupSet": [
               {
-                "Ref": "WebServerSecurityGroup"
+                "Ref": "WebServerSecurityGroupPublic"
               }
             ],
+            "SubnetId": {"Ref": "subnetPublic"},
             "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0"
           }
         ],
+        "UserData": {
+            "Fn::Base64": {
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod 755 /home/ec2-user/group2/geth/geth\nmkdir -p /home/ec2-user/node1\nmkdir -p /home/ec2-user/node2\ncat << 'EOF' > /home/ec2-user/node1/pwd.txt\nnode1\nEOF\ncat << 'EOF' > /home/ec2-user/node2/pwd.txt\nnode2\nEOF\ncd /home/ec2-user/node1\ngeth --datadir ./data account new  --password /home/ec2-user/node1/pwd.txt\ncd /home/ec2-user/node2\ngeth --datadir ./data account new --password /home/ec2-user/node2/pwd.txt\n"
+
+            }
+        },
         "Tags": [
           {
             "Key": "purpose",
@@ -105,7 +194,7 @@
         ]
       }
     },
-    "EC2InstanceNode3": {
+    "EC2InstanceNodePrivate3": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "InstanceType": {
@@ -119,13 +208,20 @@
           {
             "GroupSet": [
               {
-                "Ref": "WebServerSecurityGroup"
+                "Ref": "WebServerSecurityGroupPrivate"
               }
             ],
+            "SubnetId": {"Ref": "subnetPrivate"},
             "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0"
           }
         ],
+        "UserData": {
+            "Fn::Base64": {
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/bnode\ncat << 'EOF' > /home/ec2-user/genesis_node.json\n{\n  \"config\": {\n    \"chainId\": 12345,\n    \"homesteadBlock\": 0,\n    \"eip150Block\": 0,\n    \"eip155Block\": 0,\n    \"eip158Block\": 0,\n    \"byzantiumBlock\": 0,\n    \"constantinopleBlock\": 0,\n    \"petersburgBlock\": 0,\n    \"istanbulBlock\": 0,\n    \"berlinBlock\": 0,\n    \"londonBlock\": 0\n  },\n  \"alloc\": {},\n  \"coinbase\": \"0x0000000000000000000000000000000000000000\",\n  \"difficulty\": \"0x20000\",\n  \"extraData\": \"\",\n  \"gasLimit\": \"0x2fefd8\",\n  \"nonce\": \"0x0000000000000042\",\n  \"mixhash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",\n  \"parentHash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",\n  \"timestamp\": \"0x00\"\n}\nEOF\ngeth init /home/ec2-user/genesis_node.json\ncd /home/ec2-user/bnode\n\nbootnode -genkey boot.key\nbootnode -nodekey ./boot.key  -verbosity 7 -addr 127.0.0.1:30301 > /home/ec2-user/bnode/enode_addr.ts\n"
+
+            }
+        },
         "Tags": [
           {
             "Key": "purpose",
