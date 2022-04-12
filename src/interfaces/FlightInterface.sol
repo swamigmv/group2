@@ -9,9 +9,10 @@ import "../libraries/SharedStructs.sol";
  * @dev Interface for the flight
  */
 interface FlightInterface {
-    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address ticketAgreementAddress) external returns (uint16, address);
-    function cancel() external returns (address, uint16);
-    function updateDeparture(uint256 newDepartureDateTime) external returns (address);
-    function complete() external returns (address, uint16);
+    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address payable ticketAgreementAddress) external payable 
+    returns (uint16, address, string memory);
+    function cancel() external returns (address, uint16, string memory);
+    function updateDeparture(uint256 newDepartureDateTime) external returns (address, string memory);
+    function complete() external returns (address, uint16, string memory);
     function getStatus() external returns (SharedStructs.FlightStatuses, uint256);
 }

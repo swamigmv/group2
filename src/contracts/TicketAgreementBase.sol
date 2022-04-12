@@ -12,6 +12,6 @@ abstract contract TicketAgreementBase {
     
     SharedStructs.TicketData private ticketData;
 
-    function settleAccounts() external virtual returns(bool);
+    function settleAccounts() external virtual returns(bool, string memory);
 
 }
