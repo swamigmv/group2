@@ -70,14 +70,6 @@
           "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
        }
     },
-    "InternetGateWayRoute": {
-      "Type" : "AWS::EC2::Route",
-      "Properties" : {
-          "RouteTableId" : { "Ref" : "RouteTable" },
-          "DestinationCidrBlock" : "0.0.0.0/0",
-          "GatewayId" : { "Ref" : "InternetGateway" }
-       }
-    },
     "AttachGateway" : {
        "Type" : "AWS::EC2::VPCGatewayAttachment",
        "Properties" : {
@@ -115,7 +107,7 @@
             "IpProtocol": "tcp",
             "FromPort": "22",
             "ToPort": "22",
-            "CidrIp": "191.0.0.0/16"
+            "CidrIp": "191.0.0.0/24"
           }
         ]
       }
@@ -227,6 +219,21 @@
           }
         ]
       }
+    },
+    "InternetGateWayRoute": {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+          "RouteTableId" : { "Ref" : "RouteTable" },
+          "DestinationCidrBlock" : "0.0.0.0/0",
+          "GatewayId" : { "Ref" : "InternetGateway" }
+       }
+    },
+    "subnetRouteTableAssociation" : {
+       "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+       "Properties" : {
+          "SubnetId" : { "Ref" : "subnetPublic" },
+          "RouteTableId" : { "Ref" : "RouteTable" }
+       }
     }
   }
 }
