@@ -75,16 +75,14 @@
       "Properties" : {
           "RouteTableId" : { "Ref" : "RouteTable" },
           "DestinationCidrBlock" : "0.0.0.0/0",
-          "GatewayId" : { "Ref" : "InternetGateway" },
-          "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+          "GatewayId" : { "Ref" : "InternetGateway" }
        }
     },
     "AttachGateway" : {
        "Type" : "AWS::EC2::VPCGatewayAttachment",
        "Properties" : {
           "VpcId" : { "Ref" : "VpcPublic" },
-          "InternetGatewayId" : { "Ref" : "InternetGateway" },
-          "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
+          "InternetGatewayId" : { "Ref" : "InternetGateway" }
         }
     },
     "WebServerSecurityGroupPublic": {
