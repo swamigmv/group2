@@ -48,7 +48,8 @@ contract Customer is CustomerInterface {
 
     function cancelTicket(address ticketAddress) external override payable returns (address, string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
-        return ticket.cancel();
+        (, string memory message) = ticket.cancel();
+        return (ticketAddress, message);
     }
 
     function settleTicket(address ticketAddress) external override payable returns (address, string memory) {
