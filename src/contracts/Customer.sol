@@ -9,26 +9,37 @@ import {Flight} from "./Flight.sol";
 import "../interfaces/AirlineInterface.sol";
 
 /**
- * @title Customer
- * @dev Customer contract
+ * @title Contract used by a customer
  */
 contract Customer is CustomerInterface {
 
     address private ownerAddress;
     AirlineInterface private airline; 
     
+    /**
+    * @notice Create and instance of customer contract
+    */
     constructor () payable {
         ownerAddress = msg.sender;
     }
 
-
-    function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) external override 
-    payable returns (uint16, address, string memory) {
+    /**
+    * @notice Allows a customer to buy a ticket for the flight
+    * @param flightNumber - Flight number for which ticket to be bought
+    * @param departureDateTime - Departure date time for the flight
+    * @param buyerName - Name of the buyer
+    * @param numberOfSeats - Total number of seats to be booked
+    * @return Address of the ticket booked
+    * @return Number of the booked ticket
+    * @return Message giving the summary the execution
+    */
+    function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) 
+    external override payable returns (address, uint16, string memory) {
         uint16 ticketNumber;
         address ticketAddress;
         string memory message;
 
-        (address flightAddress, address payable ticketAgreementAddress) = airline.getFlightAddress(flightNumber, departureDateTime);
+        (address flightAddress, address payable ticketAgreementAddress) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
 
         // Confirm that flight is found.
         if (flightAddress == address(0)) {
@@ -42,26 +53,43 @@ contract Customer is CustomerInterface {
             (ticketNumber, ticketAddress, message) = flight.bookTicket(buyer, numberOfSeats, ticketAgreementAddress);
         }
 
-        return (ticketNumber, ticketAddress, message);
+        return (ticketAddress, ticketNumber, message);
 
     }
 
-    function cancelTicket(address ticketAddress) external override payable returns (address, string memory){
+    /**
+    * @notice Allows a customer to cancel the ticket
+    * @param ticketAddress - Address of the ticket to be cancelled
+    * @return Message giving the summary the execution
+    */
+    function cancelTicket(address ticketAddress) external override payable returns (string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
-        (, string memory message) = ticket.cancel();
-        return (ticketAddress, message);
+        return ticket.cancel();
     }
 
-    function settleTicket(address ticketAddress) external override payable returns (address, string memory) {
+    /**
+    * @notice Allows a customer to settle the ticket
+    * @param ticketAddress - Address of the ticket to be cancelled
+    * @return Message giving the summary the execution
+    */
+    function settleTicket(address ticketAddress) external override payable returns (string memory) {
         TicketInterface ticket = TicketInterface(ticketAddress);
         return ticket.settleAccounts();
     }
 
+    /**
+    * @notice Allows the owner of the contract to set address of the airline contract to be used
+    * @param airlineAddress - Address of the airline contract
+    * @return True on success
+    */
     function setAirline(address airlineAddress) external override ownerOnly returns (bool) {
         airline = AirlineInterface(airlineAddress);
         return true;
     }
 
+    /**
+    * @notice Modifier to ensure that the method is executed by the owner of the contract
+    */
     modifier ownerOnly {
         require(tx.origin == ownerAddress, "You are not allowed to perform this operation");
         _;

@@ -2,11 +2,13 @@
 
 pragma solidity >=0.8.6 < 0.9.0;
 
+/**
+ * @title Library containing structures and enumerations shared accross the contracts.
+ */
 library SharedStructs {
 
     /**
-    * @title FlightStatuses
-    * @dev Enum for the flight status
+    * @title Enumeration of the flight statuses
     */
     enum FlightStatuses {
         OnTime,
@@ -17,8 +19,7 @@ library SharedStructs {
     }
 
     /**
-    * @title FlightDetails
-    * @dev Structure for the flight details
+    * @title Data structure containing a flight details
     */
     struct FlightDetails {
         string flightNumber;
@@ -28,8 +29,7 @@ library SharedStructs {
     }
 
     /**
-    * @title Buyer
-    * @dev Structure for the buyer details
+    * @title Data structure containing a buyer details
     */
     struct Buyer {
         string name;
@@ -37,8 +37,7 @@ library SharedStructs {
     }
 
     /**
-    * @title TicketStatuses
-    * @dev Enum for the ticket status
+    * @title Enumeration of the ticket statuses
     */
     enum TicketStatuses {
         Open,
@@ -47,8 +46,7 @@ library SharedStructs {
     }
 
     /**
-    * @title TicketData
-    * @dev Structure for the ticket's data
+    * @title Data structure for the ticket's data
     */
     struct TicketData {
         address payable ticketAgreementAddress;
