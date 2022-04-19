@@ -49,7 +49,7 @@ contract Customer is CustomerInterface {
 
             SharedStructs.Buyer memory buyer;
             buyer.name = buyerName;
-            buyer.buyerAddress = tx.origin;
+            buyer.buyerAddress = payable(tx.origin);
             (ticketNumber, ticketAddress, message) = flight.bookTicket(buyer, numberOfSeats, ticketAgreementAddress);
         }
 

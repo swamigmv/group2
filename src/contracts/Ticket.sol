@@ -13,6 +13,7 @@ import "../libraries/SharedFuncs.sol";
 contract Ticket is TicketInterface {
 
     SharedStructs.TicketData private ticketData;
+    string internal status;
 
     /**
      * @notice Creates an instance of the ticket contract
@@ -40,15 +41,19 @@ contract Ticket is TicketInterface {
     function cancel() external override payable returns (string memory) {
         string memory message;
         if (ticketData.status == SharedStructs.TicketStatuses.Open) {
-            // Update the status and timestamp of the ticket, so that it will be available during account settlements.
-            ticketData.cancelledDateTime = SharedFuncs.getCurrentDateTime();
-            ticketData.status = SharedStructs.TicketStatuses.Cancelled;
-            this.settleAccounts();
+            if (ticketData.ticketAgreementAddress != address(0)) {
+                (bool success,) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("cancelTicket()"));
+                if (success) {
+                    message = ticketData.agreementResult;
+                } else {
+                    message = "Error occured while cancelling the ticket.";
+                }
+            }
         }
         else {
             message = "Ticket is either settled or cancelled. Hence, cannot be cancelled";
         }
-        return message;
+        return (message);
     }
     
     /**
@@ -59,7 +64,8 @@ contract Ticket is TicketInterface {
         string memory message;
 
         if (ticketData.ticketAgreementAddress != address(0)) {
-            (bool success,) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts()"));
+            SharedStructs.FlightDetails memory flightDetails = FlightInterface(ticketData.flightAddress).getDetails();
+            (bool success,) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails calldata)", flightDetails));
             if (success) {
                 ticketData.status = SharedStructs.TicketStatuses.Settled;
                 message = "Accounts settled successfully.";

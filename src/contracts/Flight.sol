@@ -26,11 +26,13 @@ contract Flight is FlightInterface {
     * @param seatingCapacity - Seating capacity of the flight
     * @param perSeatCharge - Charge per seat
     */
-    constructor(string memory flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 perSeatCharge) payable {
+    constructor(string memory flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 perSeatCharge, 
+    address payable airlineAddress) payable {
         flightDetails.flightNumber = flightNumber;
         flightDetails.originalDepartureDateTime = originalDepartureDateTime;
         flightDetails.actualDepartureDateTime = originalDepartureDateTime;
         flightDetails.status = SharedStructs.FlightStatuses.OnTime;
+        flightDetails.airlineAddress = airlineAddress;
         availableCapacity = seatingCapacity;
         nextTicketNumber = 0;
         amountPerSeat = perSeatCharge;
@@ -65,7 +67,7 @@ contract Flight is FlightInterface {
 
             Ticket ticket = new Ticket(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
             // TODO: The below line is not working. Fix the issue.
-            payable(address(ticket)).transfer(billedAmount);
+            //payable(address(ticket)).transfer(billedAmount);
             //payable(address(SharedConstants.ESCROW_SERVICE_ACCOUNT)).transfer(billedAmount);
             tickets.push(ticket);
             ticketNumber = nextTicketNumber;
@@ -169,11 +171,12 @@ contract Flight is FlightInterface {
     }
 
     /**
-    * @notice Gets the flight status
-    * @return Status of the flight
-    * @return New or actual departure date time
+    * @notice Gets the flight details
+    * @return SharedStructs.FlightDetails data structure containing flight's latest details
     */
-    function getStatus() external override view returns (SharedStructs.FlightStatuses, uint256) {
-        return (flightDetails.status, flightDetails.actualDepartureDateTime);
+    function getDetails() external override view returns (SharedStructs.FlightDetails memory) {
+        SharedStructs.FlightDetails memory result = SharedStructs.FlightDetails(flightDetails.flightNumber, flightDetails.originalDepartureDateTime, flightDetails.actualDepartureDateTime, 
+        flightDetails.status, flightDetails.airlineAddress);
+        return result;
     }
 }

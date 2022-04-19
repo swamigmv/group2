@@ -39,7 +39,7 @@ contract Airline is AirlineInterface {
       address flightAddress = flights[originalDepartureDateTime][flightNumber];
 
       if (flightAddress == address(0)) {
-         Flight flight = new Flight(flightNumber, originalDepartureDateTime, seatingCapacity, chargePerSeat);
+         Flight flight = new Flight(flightNumber, originalDepartureDateTime, seatingCapacity, chargePerSeat, payable(address(this)));
          flightAddress = address(flight);
          flights[originalDepartureDateTime][flightNumber] = flightAddress;
          message = "Flight added successfully";

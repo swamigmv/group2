@@ -43,9 +43,8 @@ interface FlightInterface {
     function complete() external returns (uint16, string memory);
 
     /**
-    * @notice Gets the flight status
-    * @return Status of the flight
-    * @return New or actual departure date time
+    * @notice Gets the flight details
+    * @return SharedStructs.FlightDetails data structure containing flight's latest details
     */
-    function getStatus() external returns (SharedStructs.FlightStatuses, uint256);
+    function getDetails() external returns (SharedStructs.FlightDetails calldata);
 }

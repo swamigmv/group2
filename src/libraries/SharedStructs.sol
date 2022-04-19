@@ -26,6 +26,7 @@ library SharedStructs {
         uint256 originalDepartureDateTime;
         uint256 actualDepartureDateTime; 
         FlightStatuses status;
+        address payable airlineAddress;
     }
 
     /**
@@ -33,7 +34,7 @@ library SharedStructs {
     */
     struct Buyer {
         string name;
-        address buyerAddress;
+        address payable buyerAddress;
     }
 
     /**
@@ -57,6 +58,9 @@ library SharedStructs {
         uint16 numberOfSeats;
         uint256 cancelledDateTime;
         TicketStatuses status;
+        string agreementResult;
+        uint256 paidToCustomer;
+        uint256 paidToAirline;
     }
     
 }
