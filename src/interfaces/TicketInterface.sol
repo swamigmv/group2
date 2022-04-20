@@ -12,13 +12,13 @@ interface TicketInterface {
      * @notice Cancels the ticket
      * @return Summary of the operation 
      */
-    function cancel() external payable returns (string memory);
+    function cancel() external returns (string memory);
 
     /**
      * @notice Settles accounts associated with the ticket
      * @return Summary of the operation 
      */
-    function settleAccounts() external payable returns (string memory);
+    function settleAccounts() external returns (string memory);
 
     /**
      * @notice Gets the status of the ticket

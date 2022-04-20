@@ -22,17 +22,18 @@ contract Flight is FlightInterface {
     /**
     * @notice Create and instance of flight contract
     * @param flightNumber - Flight number
+    * @param airlineAddress - Address of the airline
     * @param originalDepartureDateTime - Original departure date time of the flight
     * @param seatingCapacity - Seating capacity of the flight
     * @param perSeatCharge - Charge per seat
     */
-    constructor(string memory flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 perSeatCharge, 
-    address payable airlineAddress) payable {
+    constructor(string memory flightNumber, address airlineAddress, uint256 originalDepartureDateTime, uint16 seatingCapacity, 
+    uint256 perSeatCharge) payable {
         flightDetails.flightNumber = flightNumber;
+        flightDetails.airlineAddress = airlineAddress;
         flightDetails.originalDepartureDateTime = originalDepartureDateTime;
         flightDetails.actualDepartureDateTime = originalDepartureDateTime;
         flightDetails.status = SharedStructs.FlightStatuses.OnTime;
-        flightDetails.airlineAddress = airlineAddress;
         availableCapacity = seatingCapacity;
         nextTicketNumber = 0;
         amountPerSeat = perSeatCharge;
@@ -47,7 +48,7 @@ contract Flight is FlightInterface {
     * @return Ticket address
     * @return Message giving the summary the execution
     */
-    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address payable ticketAgreementAddress) external override payable 
+    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address ticketAgreementAddress) external override payable 
     returns (uint16, address, string memory) {
         
         string memory message;
@@ -65,10 +66,7 @@ contract Flight is FlightInterface {
             // Check balance of buyer's wallet. If insufficient then raise error otherwise deduct from buyer's wallet.
             require(buyer.buyerAddress.balance >= billedAmount, "Insufficient balance in buyer's account");
 
-            Ticket ticket = new Ticket(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
-            // TODO: The below line is not working. Fix the issue.
-            //payable(address(ticket)).transfer(billedAmount);
-            //payable(address(SharedConstants.ESCROW_SERVICE_ACCOUNT)).transfer(billedAmount);
+            Ticket ticket = new Ticket{value: billedAmount}(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
             tickets.push(ticket);
             ticketNumber = nextTicketNumber;
             ticketAddress = payable(address(ticket));
@@ -175,8 +173,8 @@ contract Flight is FlightInterface {
     * @return SharedStructs.FlightDetails data structure containing flight's latest details
     */
     function getDetails() external override view returns (SharedStructs.FlightDetails memory) {
-        SharedStructs.FlightDetails memory result = SharedStructs.FlightDetails(flightDetails.flightNumber, flightDetails.originalDepartureDateTime, flightDetails.actualDepartureDateTime, 
-        flightDetails.status, flightDetails.airlineAddress);
+        SharedStructs.FlightDetails memory result = SharedStructs.FlightDetails(flightDetails.flightNumber, flightDetails.airlineAddress, 
+        flightDetails.originalDepartureDateTime, flightDetails.actualDepartureDateTime, flightDetails.status);
         return result;
     }
 }

@@ -17,7 +17,7 @@ interface FlightInterface {
     * @return Ticket address
     * @return Message giving the summary the execution
     */
-    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address payable ticketAgreementAddress) external payable 
+    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address ticketAgreementAddress) external payable 
     returns (uint16, address, string memory);
 
     /**

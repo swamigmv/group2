@@ -5,6 +5,8 @@ pragma solidity >=0.8.6 < 0.9.0;
 import "../libraries/SharedStructs.sol";
 import "../libraries/SharedFuncs.sol";
 import "../interfaces/FlightInterface.sol";
+import "../interfaces/AirlineInterface.sol";
+import "../interfaces/EscrowInterface.sol";
 
 /**
  * @title Base contract for all ticket agreements
@@ -78,8 +80,11 @@ abstract contract TicketAgreementBase {
         // Calculate refund amount
         uint256 refundAmount = ticketData.amount - chargeAmount;
 
+        // Get Escrow contract
+        EscrowInterface escrow = EscrowInterface(ticketData.escrowContractAddress);
+
         if (refundAmount > 0) {
-            //ticketData.buyer.buyerAddress.transfer(refundAmount);
+            escrow.withdraw(ticketData.buyer.buyerAddress, refundAmount);
             ticketData.paidToCustomer = refundAmount;
             if (bytes(message).length > 0) {
                 message = string(abi.encodePacked(message, ". Amount refunded to the customer"));
@@ -89,7 +94,9 @@ abstract contract TicketAgreementBase {
         }
 
         if (chargeAmount > 0) {
-            //flightDetails.airlineAddress.transfer(refundAmount);
+
+            address payable airlineWallet = AirlineInterface(flightDetails.airlineAddress).getWallet();
+            escrow.withdraw(airlineWallet, chargeAmount);
             ticketData.paidToAirline = chargeAmount;
             if (bytes(message).length > 0) {
                 message = string(abi.encodePacked(message, ". Amount paid to the airline"));

@@ -58,11 +58,23 @@ interface AirlineInterface {
     function setTicketAgreement(address payable ticketAgreementAddress) external returns (bool);
 
     /**
+    * @notice Gets the wallet address for the airline
+    * @return Address of the wallet for the airline
+    */
+   function getWallet() external returns (address payable);
+
+    /**
+    * @notice Sets the wallet address for the airline
+    * @param airlineWalletAddress - Address of the wallet for the airline
+    */
+   function setWallet(address payable airlineWalletAddress) external returns (bool);
+
+    /**
     * @notice Gets the ticket booking configuration
     * @param flightNumber - Flight number for which the booking to be made
     * @param originalDepartureDateTime - Original departure time of the flight for which the booking to be made
     * @return Contract address of the flight for which the booking to be made
     * @return Address of ticket agreement contract to be used for new ticket
     */
-    function getTicketBookingConfiguration(string calldata flightNumber, uint256 originalDepartureDateTime) external view returns (address, address payable);
+    function getTicketBookingConfiguration(string calldata flightNumber, uint256 originalDepartureDateTime) external view returns (address payable, address);
 }

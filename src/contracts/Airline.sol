@@ -12,9 +12,10 @@ import {Flight} from "./Flight.sol";
  */
 contract Airline is AirlineInterface {
 
-   mapping(uint256 => mapping(string => address)) private flights;
-   address payable private ticketAgreementAddress;
+   mapping(uint256 => mapping(string => address payable)) private flights;
+   address private ticketAgreementAddress;
    address private ownerAddress;
+   address payable private walletAddress;
 
    /**
     * @notice Creates an instance of Airline contract
@@ -36,11 +37,11 @@ contract Airline is AirlineInterface {
    external override returns (address, string memory) {
 
       string memory message;
-      address flightAddress = flights[originalDepartureDateTime][flightNumber];
+      address payable flightAddress = flights[originalDepartureDateTime][flightNumber];
 
       if (flightAddress == address(0)) {
-         Flight flight = new Flight(flightNumber, originalDepartureDateTime, seatingCapacity, chargePerSeat, payable(address(this)));
-         flightAddress = address(flight);
+         Flight flight = new Flight(flightNumber, address(this), originalDepartureDateTime, seatingCapacity, chargePerSeat);
+         flightAddress = payable(address(flight));
          flights[originalDepartureDateTime][flightNumber] = flightAddress;
          message = "Flight added successfully";
       }
@@ -137,13 +138,30 @@ contract Airline is AirlineInterface {
    }
 
    /**
+    * @notice Gets the wallet address for the airline
+    * @return Address of the wallet for the airline
+    */
+   function getWallet() external override view returns (address payable){
+      return walletAddress;
+   }
+
+   /**
+    * @notice Sets the wallet address for the airline
+    * @param airlineWalletAddress - Address of the wallet for the airline
+    */
+   function setWallet(address payable airlineWalletAddress) external override returns (bool){
+      walletAddress = airlineWalletAddress;
+      return true;
+   }
+
+   /**
     * @notice Gets the ticket booking configuration
     * @param flightNumber - Flight number for which the booking to be made
     * @param originalDepartureDateTime - Original departure time of the flight for which the booking to be made
     * @return Contract address of the flight for which the booking to be made
     * @return Address of ticket agreement contract to be used for new ticket
     */
-   function getTicketBookingConfiguration(string calldata flightNumber, uint256 originalDepartureDateTime) external override view returns (address, address payable) {
+   function getTicketBookingConfiguration(string calldata flightNumber, uint256 originalDepartureDateTime) external override view returns (address payable, address) {
        return (flights[originalDepartureDateTime][flightNumber], ticketAgreementAddress);
    }
 }

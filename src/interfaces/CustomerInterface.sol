@@ -27,14 +27,14 @@ interface CustomerInterface {
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
     */
-    function cancelTicket(address ticketAddress) external payable returns (string memory);
+    function cancelTicket(address ticketAddress) external returns (string memory);
 
     /**
     * @notice Allows a customer to settle the ticket
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
     */
-    function settleTicket(address ticketAddress) external payable returns (string memory);
+    function settleTicket(address ticketAddress) external returns (string memory);
 
     /**
     * @notice Allows the owner of the contract to set address of the airline contract to be used

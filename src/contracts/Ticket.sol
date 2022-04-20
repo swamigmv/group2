@@ -6,6 +6,7 @@ import "../libraries/SharedStructs.sol";
 import "../interfaces/FlightInterface.sol";
 import "../interfaces/TicketInterface.sol";
 import "../libraries/SharedFuncs.sol";
+import "./Escrow.sol";
 
 /**
  * @title Contract for a ticket
@@ -23,8 +24,8 @@ contract Ticket is TicketInterface {
      * @param amount - Amount paid for booking the ticket
      * @param ticketAgreementAddress - Address of the ticket agreement bound to the ticket instance
      */
-    constructor(address flightAddress, uint16 ticketNumber, SharedStructs.Buyer memory buyer, uint16 numberOfSeats, uint256 amount, 
-    address payable ticketAgreementAddress) payable {
+    constructor (address flightAddress, uint16 ticketNumber, SharedStructs.Buyer memory buyer, uint16 numberOfSeats, uint256 amount, 
+    address ticketAgreementAddress) payable {
         ticketData.flightAddress = flightAddress;
         ticketData.ticketNumber = ticketNumber;
         ticketData.buyer.name = buyer.name;
@@ -32,13 +33,15 @@ contract Ticket is TicketInterface {
         ticketData.numberOfSeats = numberOfSeats;
         ticketData.amount = amount;
         ticketData.ticketAgreementAddress = ticketAgreementAddress;
+        Escrow escrow = new Escrow{value: amount}();
+        ticketData.escrowContractAddress = payable(address(escrow));
     }
 
     /**
      * @notice Cancels the ticket
      * @return Summary of the operation 
      */
-    function cancel() external override payable returns (string memory) {
+    function cancel() external override returns (string memory) {
         string memory message;
         if (ticketData.status == SharedStructs.TicketStatuses.Open) {
             if (ticketData.ticketAgreementAddress != address(0)) {
@@ -60,7 +63,7 @@ contract Ticket is TicketInterface {
      * @notice Settles accounts associated with the ticket
      * @return Summary of the operation 
      */
-    function settleAccounts() external override payable returns (string memory) {
+    function settleAccounts() external override returns (string memory) {
         string memory message;
 
         if (ticketData.ticketAgreementAddress != address(0)) {

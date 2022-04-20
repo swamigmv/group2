@@ -39,18 +39,18 @@ contract Customer is CustomerInterface {
         address ticketAddress;
         string memory message;
 
-        (address flightAddress, address payable ticketAgreementAddress) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
+        (address payable flightAddress, address ticketAgreementAddress) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
 
         // Confirm that flight is found.
         if (flightAddress == address(0)) {
             message = "Specified flight is not available for the booking.";
         } else {
-            FlightInterface flight = FlightInterface(payable(flightAddress));
+            FlightInterface flight = FlightInterface(flightAddress);
 
             SharedStructs.Buyer memory buyer;
             buyer.name = buyerName;
             buyer.buyerAddress = payable(tx.origin);
-            (ticketNumber, ticketAddress, message) = flight.bookTicket(buyer, numberOfSeats, ticketAgreementAddress);
+            (ticketNumber, ticketAddress, message) = flight.bookTicket{value: msg.value}(buyer, numberOfSeats, ticketAgreementAddress);
         }
 
         return (ticketAddress, ticketNumber, message);
@@ -62,7 +62,7 @@ contract Customer is CustomerInterface {
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
     */
-    function cancelTicket(address ticketAddress) external override payable returns (string memory){
+    function cancelTicket(address ticketAddress) external override returns (string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
         return ticket.cancel();
     }
@@ -72,7 +72,7 @@ contract Customer is CustomerInterface {
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
     */
-    function settleTicket(address ticketAddress) external override payable returns (string memory) {
+    function settleTicket(address ticketAddress) external override returns (string memory) {
         TicketInterface ticket = TicketInterface(ticketAddress);
         return ticket.settleAccounts();
     }

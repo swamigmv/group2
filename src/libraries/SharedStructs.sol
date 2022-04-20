@@ -23,10 +23,10 @@ library SharedStructs {
     */
     struct FlightDetails {
         string flightNumber;
+        address airlineAddress;
         uint256 originalDepartureDateTime;
         uint256 actualDepartureDateTime; 
         FlightStatuses status;
-        address payable airlineAddress;
     }
 
     /**
@@ -50,8 +50,9 @@ library SharedStructs {
     * @title Data structure for the ticket's data
     */
     struct TicketData {
-        address payable ticketAgreementAddress;
+        address ticketAgreementAddress;
         address flightAddress;
+        address payable escrowContractAddress;
         uint16 ticketNumber;
         Buyer buyer;
         uint256 amount;
