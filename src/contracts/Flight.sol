@@ -5,12 +5,12 @@ pragma solidity >=0.8.6 < 0.9.0;
 import {Ticket} from "./Ticket.sol";
 import "../interfaces/FlightInterface.sol";
 import "../libraries/SharedConstants.sol";
+import "../libraries/SharedFuncs.sol";
 
 /**
- * @title Flight
- * @dev Flight contract
+ * @title Contract for a flight
+ * @notice Contains members that are provided by a flight contract
  */
-
 contract Flight is FlightInterface {
 
     SharedStructs.FlightDetails private flightDetails;
@@ -19,17 +19,36 @@ contract Flight is FlightInterface {
     uint256 private amountPerSeat;
     Ticket[] private tickets;
 
-    constructor(string memory flightNumber, uint256 departureDateTime, uint16 seatingCapacity, uint256 perSeatCharge) payable {
+    /**
+    * @notice Create and instance of flight contract
+    * @param flightNumber - Flight number
+    * @param airlineAddress - Address of the airline
+    * @param originalDepartureDateTime - Original departure date time of the flight
+    * @param seatingCapacity - Seating capacity of the flight
+    * @param perSeatCharge - Charge per seat
+    */
+    constructor(string memory flightNumber, address airlineAddress, uint256 originalDepartureDateTime, uint16 seatingCapacity, 
+    uint256 perSeatCharge) payable {
         flightDetails.flightNumber = flightNumber;
-        flightDetails.originalDepartureDateTime = departureDateTime;
-        flightDetails.actualDepartureDateTime = departureDateTime;
+        flightDetails.airlineAddress = airlineAddress;
+        flightDetails.originalDepartureDateTime = originalDepartureDateTime;
+        flightDetails.actualDepartureDateTime = originalDepartureDateTime;
         flightDetails.status = SharedStructs.FlightStatuses.OnTime;
         availableCapacity = seatingCapacity;
         nextTicketNumber = 0;
         amountPerSeat = perSeatCharge;
     }
 
-    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address payable ticketAgreementAddress) external override payable 
+    /**
+    * @notice Books the ticket for the flight
+    * @param buyer - Buyer information
+    * @param numberOfSeatsRequired - Number of seats to be booked
+    * @param ticketAgreementAddress - Address of the ticket agreement contract bound to the ticket
+    * @return Ticket number
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function bookTicket(SharedStructs.Buyer calldata buyer, uint16 numberOfSeatsRequired, address ticketAgreementAddress) external override payable 
     returns (uint16, address, string memory) {
         
         string memory message;
@@ -39,7 +58,7 @@ contract Flight is FlightInterface {
         if (flightDetails.status != SharedStructs.FlightStatuses.OnTime && flightDetails.status != SharedStructs.FlightStatuses.Delayed) {
             message = "Booking for this flight is not allowed as it is either departed or cancelled.";
         } else if (numberOfSeatsRequired > availableCapacity) {
-            message = "No seats available.";
+            message = "No seats available";
         } else {
 
             uint256 billedAmount = numberOfSeatsRequired * amountPerSeat;
@@ -47,14 +66,11 @@ contract Flight is FlightInterface {
             // Check balance of buyer's wallet. If insufficient then raise error otherwise deduct from buyer's wallet.
             require(buyer.buyerAddress.balance >= billedAmount, "Insufficient balance in buyer's account");
 
-            Ticket ticket = new Ticket(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
-            // TODO: The below line is not working. Fix the issue.
-            payable(address(ticket)).transfer(billedAmount);
-            //payable(address(SharedConstants.PAYMENT_SERVICE_ACCOUNT)).transfer(billedAmount);
+            Ticket ticket = new Ticket{value: billedAmount}(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
             tickets.push(ticket);
             ticketNumber = nextTicketNumber;
             ticketAddress = payable(address(ticket));
-            message = "Ticket booked successfully.";
+            message = "Ticket booked successfully";
             availableCapacity -= numberOfSeatsRequired;
 
         }
@@ -62,13 +78,18 @@ contract Flight is FlightInterface {
         return (ticketNumber, ticketAddress, message);
     }
 
-    function cancel() external override returns (address, uint16, string memory) {
+    /**
+    * @notice Cancels the ticket for the flight
+    * @return Total number of tickets cancelled
+    * @return Message giving the summary the execution
+    */
+    function cancel() external override returns (uint16, string memory) {
 
         uint16 numberOfTickets;
         string memory message;
 
         if (flightDetails.status == SharedStructs.FlightStatuses.InTransit || flightDetails.status == SharedStructs.FlightStatuses.Completed) { 
-            message = "Flight is either in transit or completed. Hence cannot be cancelled.";
+            message = "Flight is either in transit or completed. Hence cannot be cancelled";
             numberOfTickets = 0;
         } else {
             // Update flight status first so that it will be reflected in the processing.
@@ -78,42 +99,53 @@ contract Flight is FlightInterface {
                 tickets[index].settleAccounts();
             }
             numberOfTickets = uint16(tickets.length);
-            message = "Flight is cancelled and tickets are settled successfully.";
+            message = "Flight is cancelled and tickets are settled successfully";
         }
 
-        return (address(this), numberOfTickets, message);
+        return (numberOfTickets, message);
     }
 
-    function updateDeparture(uint256 newDepartureDateTime) external override returns (address, string memory) {
+    /**
+    * @notice Updates the depature time of the flight
+    * @param newDepartureDateTime - New departure date time of the flight
+    * @return Status of the flight depending on the new departure date time
+    * @return Message giving the summary the execution
+    */
+    function updateDeparture(uint256 newDepartureDateTime) external override returns (SharedStructs.FlightStatuses, string memory) {
 
         string memory message;
 
         if (flightDetails.status != SharedStructs.FlightStatuses.OnTime && flightDetails.status != SharedStructs.FlightStatuses.Delayed) {
-            message = "Departure update for this flight is not allowed as it is either departed or cancelled.";
+            message = "Departure update for this flight is not allowed as it is either departed or cancelled";
         } else {
             flightDetails.actualDepartureDateTime = newDepartureDateTime;
 
             // Check the new departure time. Depending on that update the flight status.
-            if (newDepartureDateTime >= block.timestamp)
+            if (newDepartureDateTime >= SharedFuncs.getCurrentDateTime())
             {
                 flightDetails.status = SharedStructs.FlightStatuses.InTransit;
             } else if (flightDetails.originalDepartureDateTime < newDepartureDateTime) {
                 flightDetails.status = SharedStructs.FlightStatuses.Delayed;
             } else {
                 flightDetails.status = SharedStructs.FlightStatuses.OnTime;
-                message = "Flight is updated successfully.";
+                message = "Flight is updated successfully";
             }
         }
-        return (address(this), message);
+        return (flightDetails.status, message);
     }
 
-    function complete() external override returns (address, uint16, string memory) {
+    /**
+    * @notice Marks the flight as complete
+    * @return Number of tickets settled
+    * @return Message giving the summary the execution
+    */
+    function complete() external override returns (uint16, string memory) {
 
         uint16 numberOfTickets;
         string memory message;
 
         if (flightDetails.status != SharedStructs.FlightStatuses.InTransit) {
-            message =  "Flight must be in transit before completing it.";
+            message =  "Flight must be in transit before completing it";
             numberOfTickets = 0;
         } else {
             // Update flight status first so that it will be reflected in the processing.
@@ -129,14 +161,20 @@ contract Flight is FlightInterface {
                     tickets[index].settleAccounts();
                 }
             }
-            message =  "Flight status is updated and tickets are settled.";
+            message =  "Flight status is updated and tickets are settled";
             numberOfTickets = uint16(tickets.length);
         }
 
-        return (address(this), numberOfTickets, message);
+        return (numberOfTickets, message);
     }
 
-    function getStatus() external override view returns (SharedStructs.FlightStatuses, uint256) {
-        return (flightDetails.status, flightDetails.actualDepartureDateTime);
+    /**
+    * @notice Gets the flight details
+    * @return SharedStructs.FlightDetails data structure containing flight's latest details
+    */
+    function getDetails() external override view returns (SharedStructs.FlightDetails memory) {
+        SharedStructs.FlightDetails memory result = SharedStructs.FlightDetails(flightDetails.flightNumber, flightDetails.airlineAddress, 
+        flightDetails.originalDepartureDateTime, flightDetails.actualDepartureDateTime, flightDetails.status);
+        return result;
     }
 }
