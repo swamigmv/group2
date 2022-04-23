@@ -5,7 +5,7 @@
     "InstanceType": {
       "Description": "WebServer EC2 instance type",
       "Type": "String",
-      "Default": "t2.micro"
+      "Default": "t2.small"
     },
     "InstanceAMI": {
       "Description": "EC2 instance AMI",
@@ -90,6 +90,30 @@
             "FromPort": "22",
             "ToPort": "22",
             "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "30000",
+            "ToPort": "30999",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8546",
+            "ToPort": "8546",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8545",
+            "ToPort": "8545",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "udp",
+            "FromPort": "30000",
+            "ToPort": "30999",
+            "CidrIp": "0.0.0.0/0"
           }
         ],
         "Tags" : [ {"Key" : "stack", "Value" : "internet_gateway"} ]
@@ -136,7 +160,7 @@
         ],
         "UserData": {
             "Fn::Base64": {
-                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod 755 /home/ec2-user/group2/geth/geth\nmkdir -p /home/ec2-user/node1\nmkdir -p /home/ec2-user/node2\ncat << 'EOF' > /home/ec2-user/node1/pwd.txt\nnode1\nEOF\ncat << 'EOF' > /home/ec2-user/node2/pwd.txt\nnode2\nEOF\ncd /home/ec2-user/node1\ngeth --datadir ./data account new  --password /home/ec2-user/node1/pwd.txt\ncd /home/ec2-user/node2\ngeth --datadir ./data account new --password /home/ec2-user/node2/pwd.txt\n"
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\nMINER_NAME=\"EagleAccount1\"\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchown ec2-user /home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/Swami\nmkdir -p /home/ec2-user/Vishal\nmkdir -p /home/ec2-user/EagleAccount1\n\ncat << 'EOF' > /home/ec2-user/Swami/pwd.txt\nnode\nEOF\ncat << 'EOF' > /home/ec2-user/Vishal/pwd.txt\nnode\nEOF\ncat << 'EOF' > /home/ec2-user/EagleAccount1/pwd.txt\nacct1\nEOF\ncat << 'EOF' > /home/ec2-user/.bashrc\n\nif [ -f /etc/bashrc ]; then\n        . /etc/bashrc\nfi\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nEOF\ncd /home/ec2-user/Swami\ngeth --datadir ./data account new  --password /home/ec2-user/Swami/pwd.txt\ncd /home/ec2-user/Vishal\ngeth --datadir ./data account new --password /home/ec2-user/Vishal/pwd.txt\ncd /home/ec2-user/EagleAccount1\ngeth --datadir ./data account new --password /home/ec2-user/EagleAccount1/pwd.txt\n\nsudo chown -R ec2-user /home/ec2-user/Swami\nsudo chown -R ec2-user /home/ec2-user/Vishal\nsudo chown -R ec2-user /home/ec2-user/EagleAccount1"
 
             }
         },
@@ -172,7 +196,7 @@
         ],
         "UserData": {
             "Fn::Base64": {
-                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod 755 /home/ec2-user/group2/geth/geth\nmkdir -p /home/ec2-user/node1\nmkdir -p /home/ec2-user/node2\ncat << 'EOF' > /home/ec2-user/node1/pwd.txt\nnode1\nEOF\ncat << 'EOF' > /home/ec2-user/node2/pwd.txt\nnode2\nEOF\ncd /home/ec2-user/node1\ngeth --datadir ./data account new  --password /home/ec2-user/node1/pwd.txt\ncd /home/ec2-user/node2\ngeth --datadir ./data account new --password /home/ec2-user/node2/pwd.txt\n"
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\nMINER_NAME=\"EagleAccount1\"\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchown ec2-user /home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/Pinakin\nmkdir -p /home/ec2-user/Madhavi\nmkdir -p /home/ec2-user/EagleAccount2\ncat << 'EOF' > /home/ec2-user/Pinakin/pwd.txt\nnode\nEOF\ncat << 'EOF' > /home/ec2-user/Madhavi/pwd.txt\nnode\nEOF\ncat << 'EOF' > /home/ec2-user/EagleAccount2/pwd.txt\nacct2\nEOF\ncat << 'EOF' > /home/ec2-user/.bashrc\n\nif [ -f /etc/bashrc ]; then\n        . /etc/bashrc\nfi\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nEOF\ncd /home/ec2-user/Pinakin\ngeth --datadir ./data account new  --password /home/ec2-user/Pinakin/pwd.txt\ncd /home/ec2-user/Madhavi\ngeth --datadir ./data account new --password /home/ec2-user/Madhavi/pwd.txt\ncd /home/ec2-user/EagleAccount2\ngeth --datadir ./data account new --password /home/ec2-user/EagleAccount2/pwd.txt\nsudo chown -R ec2-user /home/ec2-user/Pinakin\nsudo chown -R ec2-user /home/ec2-user/Madhavi\nsudo chown -R ec2-user /home/ec2-user/EagleAccount2"
 
             }
         },
@@ -198,17 +222,17 @@
           {
             "GroupSet": [
               {
-                "Ref": "WebServerSecurityGroupPrivate"
+                "Ref": "WebServerSecurityGroupPublic"
               }
             ],
-            "SubnetId": {"Ref": "subnetPrivate"},
+            "SubnetId": {"Ref": "subnetPublic"},
             "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0"
           }
         ],
         "UserData": {
             "Fn::Base64": {
-                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/bnode\ncat << 'EOF' > /home/ec2-user/genesis_node.json\n{\n  \"config\": {\n    \"chainId\": 12345,\n    \"homesteadBlock\": 0,\n    \"eip150Block\": 0,\n    \"eip155Block\": 0,\n    \"eip158Block\": 0,\n    \"byzantiumBlock\": 0,\n    \"constantinopleBlock\": 0,\n    \"petersburgBlock\": 0,\n    \"istanbulBlock\": 0,\n    \"berlinBlock\": 0,\n    \"londonBlock\": 0\n  },\n  \"alloc\": {},\n  \"coinbase\": \"0x0000000000000000000000000000000000000000\",\n  \"difficulty\": \"0x20000\",\n  \"extraData\": \"\",\n  \"gasLimit\": \"0x2fefd8\",\n  \"nonce\": \"0x0000000000000042\",\n  \"mixhash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",\n  \"parentHash\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",\n  \"timestamp\": \"0x00\"\n}\nEOF\ngeth init /home/ec2-user/genesis_node.json\ncd /home/ec2-user/bnode\n\nbootnode -genkey boot.key\nbootnode -nodekey ./boot.key  -verbosity 7 -addr 127.0.0.1:30301 > /home/ec2-user/bnode/enode_addr.ts\n"
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nsudo chown ec2-user /home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/bnode\ncat << 'EOF' > /home/ec2-user/.bashrc\n\nif [ -f /etc/bashrc ]; then\n        . /etc/bashrc\nfi\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nEOF\ngeth init /home/ec2-user/genesis_node.json\ncd /home/ec2-user/bnode\n\nbootnode -genkey boot.key\nbootnode -nodekey ./boot.key  -verbosity 7 -addr 127.0.0.1:30301 > /home/ec2-user/bnode/enode_addr.ts"
 
             }
         },
