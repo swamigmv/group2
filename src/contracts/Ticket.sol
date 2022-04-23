@@ -45,11 +45,13 @@ contract Ticket is TicketInterface {
         string memory message;
         if (ticketData.status == SharedStructs.TicketStatuses.Open) {
             if (ticketData.ticketAgreementAddress != address(0)) {
-                (bool success,) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("cancelTicket()"));
+                (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("cancelTicket()"));
                 if (success) {
                     message = ticketData.agreementResult;
                 } else {
-                    message = "Error occured while cancelling the ticket.";
+                    assembly {
+                        revert(add(32, returndata), mload(returndata))
+                    }
                 }
             }
         }

@@ -54,7 +54,7 @@ abstract contract TicketAgreementBase {
      * @return Amount paid to the airline
      * @return Summary of the operation
      */
-    function settleAccounts(SharedStructs.FlightDetails calldata flightDetails) external payable virtual returns(uint256, uint256, string memory) {
+    function settleAccounts(SharedStructs.FlightDetails memory flightDetails) external payable virtual returns(uint256, uint256, string memory) {
         if (ticketData.status != SharedStructs.TicketStatuses.Settled) {        
             return settleTicketAccounts(flightDetails);
         } else {
@@ -78,7 +78,13 @@ abstract contract TicketAgreementBase {
         (chargeAmount, message) = calculateCharge(flightDetails);
         
         // Calculate refund amount
-        uint256 refundAmount = ticketData.amount - chargeAmount;
+        uint256 refundAmount;
+        
+        if (ticketData.amount < chargeAmount) {
+            refundAmount = ticketData.amount;
+        } else {
+            refundAmount = ticketData.amount - chargeAmount;
+        }
 
         // Get Escrow contract
         EscrowInterface escrow = EscrowInterface(ticketData.escrowContractAddress);
@@ -87,7 +93,7 @@ abstract contract TicketAgreementBase {
             escrow.withdraw(ticketData.buyer.buyerAddress, refundAmount);
             ticketData.paidToCustomer = refundAmount;
             if (bytes(message).length > 0) {
-                message = string(abi.encodePacked(message, ". Amount refunded to the customer"));
+                message = string(abi.encodePacked(message, ". ", SharedFuncs.uintToString(refundAmount), " refunded to the customer"));
             } else {
                 message = "Amount refunded to the customer";
             }
@@ -99,7 +105,7 @@ abstract contract TicketAgreementBase {
             escrow.withdraw(airlineWallet, chargeAmount);
             ticketData.paidToAirline = chargeAmount;
             if (bytes(message).length > 0) {
-                message = string(abi.encodePacked(message, ". Amount paid to the airline"));
+                message = string(abi.encodePacked(message, ". ", SharedFuncs.uintToString(chargeAmount), " paid to the airline"));
             } else {
                 message = "Amount paid to the airline";
             }
