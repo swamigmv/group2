@@ -3,3 +3,4 @@
 **/bin/src
 bin/*.*
 bin/**/*.*
+**/__pycache__
