@@ -4,7 +4,6 @@ pragma solidity >=0.8.6 < 0.9.0;
 
 import {Ticket} from "./Ticket.sol";
 import "../interfaces/FlightInterface.sol";
-import "../libraries/SharedConstants.sol";
 import "../libraries/SharedFuncs.sol";
 
 /**
