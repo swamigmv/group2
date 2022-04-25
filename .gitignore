@@ -3,3 +3,5 @@
 **/bin/src
 bin/*.*
 bin/**/*.*
+**/__pycache__
+contract_addresses.py
