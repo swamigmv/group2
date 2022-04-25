@@ -3,8 +3,8 @@
 pragma solidity >=0.8.6 < 0.9.0;
 
 import "../interfaces/AirlineInterface.sol";
-import "./Ticket.sol";
-import {Flight} from "./Flight.sol";
+import "../contracts/Ticket.sol";
+import {Flight} from "../contracts/Flight.sol";
 
 /**
  * @title Contract used by an Airline

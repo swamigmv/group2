@@ -4,8 +4,8 @@ pragma solidity >=0.8.6 < 0.9.0;
 
 import "../libraries/SharedStructs.sol";
 import "../interfaces/CustomerInterface.sol";
-import "./Ticket.sol";
-import {Flight} from "./Flight.sol";
+import "../contracts/Ticket.sol";
+import {Flight} from "../contracts/Flight.sol";
 import "../interfaces/AirlineInterface.sol";
 
 /**

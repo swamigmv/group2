@@ -6,7 +6,7 @@ import "../libraries/SharedStructs.sol";
 import "../interfaces/FlightInterface.sol";
 import "../interfaces/TicketInterface.sol";
 import "../libraries/SharedFuncs.sol";
-import "./Escrow.sol";
+import "../contracts/Escrow.sol";
 
 /**
  * @title Contract for a ticket

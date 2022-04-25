@@ -1,0 +1,7 @@
+BLOCK_CHAIN_URL = "http://localhost:8545"
+
+ADMIN_ADDRESS = "0xddAC623A4334cBF3202589377B239f097D41f0F0"
+
+CONTRACT_FOLDER = "..\\contracts"
+
+ABI_FOLDER = "..\\bin\\contracts"

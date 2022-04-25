@@ -2,7 +2,7 @@
 
 pragma solidity >=0.8.6 < 0.9.0;
 
-import "./TicketAgreementBase.sol";
+import "../contracts/TicketAgreementBase.sol";
 import "../libraries/SharedFuncs.sol";
 import "../interfaces/FlightInterface.sol";
 
