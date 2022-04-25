@@ -5,7 +5,7 @@
     "InstanceType": {
       "Description": "WebServer EC2 instance type",
       "Type": "String",
-      "Default": "t2.small"
+      "Default": "t3a.micro"
     },
     "InstanceAMI": {
       "Description": "EC2 instance AMI",
@@ -99,14 +99,8 @@
           },
           {
             "IpProtocol": "tcp",
-            "FromPort": "8546",
-            "ToPort": "8546",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
             "FromPort": "8545",
-            "ToPort": "8545",
+            "ToPort": "8550",
             "CidrIp": "0.0.0.0/0"
           },
           {
@@ -232,7 +226,7 @@
         ],
         "UserData": {
             "Fn::Base64": {
-                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nsudo chown ec2-user /home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/bnode\ncat << 'EOF' > /home/ec2-user/.bashrc\n\nif [ -f /etc/bashrc ]; then\n        . /etc/bashrc\nfi\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nEOF\ngeth init /home/ec2-user/genesis_node.json\ncd /home/ec2-user/bnode\n\nbootnode -genkey boot.key\nbootnode -nodekey ./boot.key  -verbosity 7 -addr 127.0.0.1:30301 > /home/ec2-user/bnode/enode_addr.ts"
+                "Fn::Sub": "#!/bin/bash\nsudo yum update -y\nsudo yum -y install git\ncd /home/ec2-user\ngit clone https://github.com/swamigmv/group2.git\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nsudo chown ec2-user /home/ec2-user/group2/geth/\nchmod -R 755 /home/ec2-user/group2/geth/\nmkdir -p /home/ec2-user/bnode\ncat << 'EOF' > /home/ec2-user/.bashrc\n\nif [ -f /etc/bashrc ]; then\n        . /etc/bashrc\nfi\nexport PATH=$PATH:/home/ec2-user/group2/geth/\nEOF"
 
             }
         },
