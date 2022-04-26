@@ -58,6 +58,29 @@ contract Customer is CustomerInterface {
     }
 
     /**
+    * @notice Gets the ticket for the flight
+    * @param flightNumber - Flight number for which ticket address to be fetch
+    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    */
+    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external override view returns (address, string memory) {
+        string memory message;
+        address ticketAddress = address(0);
+        (address payable flightAddress,) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
+
+        // Confirm that flight is found.
+        if (flightAddress == address(0)) {
+            message = "Specified flight is not available.";
+        } else {
+            FlightInterface flight = FlightInterface(flightAddress);
+            (ticketAddress, message) = flight.getTicketAddress(ticketNumber);
+        }
+
+        return (ticketAddress, message);
+    }
+
+    /**
     * @notice Allows a customer to cancel the ticket
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution

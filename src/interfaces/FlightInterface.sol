@@ -21,6 +21,14 @@ interface FlightInterface {
     returns (uint16, address, string memory);
 
     /**
+    * @notice Gets the ticket for the flight
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function getTicketAddress(uint16 ticketNumber) external view returns (address, string memory);
+
+    /**
     * @notice Cancels the ticket for the flight
     * @return Total number of tickets cancelled
     * @return Message giving the summary the execution

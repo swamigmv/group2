@@ -78,6 +78,21 @@ contract Flight is FlightInterface {
     }
 
     /**
+    * @notice Gets the ticket for the flight
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function getTicketAddress(uint16 ticketNumber) external override view returns (address, string memory) {
+        address ticketAddress = address(0);
+        string memory message;
+
+        ticketAddress = address(tickets[ticketNumber]);
+        message = "Ticket found";
+        return (ticketAddress, message);
+    }
+
+    /**
     * @notice Cancels the ticket for the flight
     * @return Total number of tickets cancelled
     * @return Message giving the summary the execution

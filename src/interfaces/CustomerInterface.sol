@@ -23,6 +23,16 @@ interface CustomerInterface {
         external payable returns (address, uint16, string memory);
 
     /**
+    * @notice Gets the ticket for the flight
+    * @param flightNumber - Flight number for which ticket address to be fetch
+    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external view returns (address, string memory);
+
+    /**
     * @notice Allows a customer to cancel the ticket
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
