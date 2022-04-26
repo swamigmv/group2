@@ -87,7 +87,7 @@ contract Flight is FlightInterface {
         address ticketAddress = address(0);
         string memory message;
 
-        ticketAddress = address(tickets[ticketNumber]);
+        ticketAddress = address(tickets[ticketNumber - 1]);
         message = "Ticket found";
         return (ticketAddress, message);
     }
