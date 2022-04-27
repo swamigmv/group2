@@ -50,15 +50,18 @@ abstract contract TicketAgreementBase {
     /**
      * @notice Settles the account for the associated ticket
      * @param flightDetails - Latest details of the flight
-     * @return Amount refunded to the customer
-     * @return Amount paid to the airline
-     * @return Summary of the operation
      */
-    function settleAccounts(SharedStructs.FlightDetails memory flightDetails) external payable virtual returns(uint256, uint256, string memory) {
+    function settleAccounts(SharedStructs.FlightDetails memory flightDetails) external payable virtual {
         if (ticketData.status != SharedStructs.TicketStatuses.Settled) {        
-            return settleTicketAccounts(flightDetails);
+            (, , string memory resultMessage) = settleTicketAccounts(flightDetails);
+            if (bytes(resultMessage).length > 0) {
+                ticketData.agreementResult = string(abi.encodePacked(resultMessage, ". Ticket settled successfully"));
+            } else {
+                ticketData.agreementResult = "Ticket settled successfully";
+            }
         } else {
-            return (ticketData.paidToCustomer, ticketData.paidToAirline, "Ticket is already settled");
+            ticketData.agreementResult = string(abi.encodePacked("Ticket is already settled. ", SharedFuncs.uintToString(ticketData.paidToCustomer), 
+            " wei were paid to customer while ", SharedFuncs.uintToString(ticketData.paidToAirline), " wei were paid to the airline"));
         }
     }
 

@@ -69,7 +69,7 @@ contract Flight is FlightInterface {
             tickets.push(ticket);
             ticketNumber = nextTicketNumber;
             ticketAddress = payable(address(ticket));
-            message = "Ticket booked successfully";
+            message = string(abi.encodePacked("Ticket booked successfully. ", SharedFuncs.uintToString(ticket.getBalance()), " wei transferred to ticket escrow account"));
             availableCapacity -= numberOfSeatsRequired;
 
         }

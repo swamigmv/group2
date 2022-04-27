@@ -53,6 +53,8 @@ contract Customer is CustomerInterface {
             (ticketNumber, ticketAddress, message) = flight.bookTicket{value: msg.value}(buyer, numberOfSeats, ticketAgreementAddress);
         }
 
+        emit BuyTicketResult(ticketAddress, ticketNumber, message);
+
         return (ticketAddress, ticketNumber, message);
 
     }
@@ -87,7 +89,11 @@ contract Customer is CustomerInterface {
     */
     function cancelTicket(address ticketAddress) external override returns (string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
-        return ticket.cancel();
+        string memory message = ticket.cancel();
+
+        emit CancelTicketResult(message);
+
+        return message;
     }
 
     /**
@@ -97,7 +103,11 @@ contract Customer is CustomerInterface {
     */
     function settleTicket(address ticketAddress) external override returns (string memory) {
         TicketInterface ticket = TicketInterface(ticketAddress);
-        return ticket.settleAccounts();
+        string memory message = ticket.settleAccounts();
+
+        emit SettleTicketResult(message);
+
+        return message;
     }
 
     /**

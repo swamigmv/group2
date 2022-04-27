@@ -70,12 +70,14 @@ contract Ticket is TicketInterface {
 
         if (ticketData.ticketAgreementAddress != address(0)) {
             SharedStructs.FlightDetails memory flightDetails = FlightInterface(ticketData.flightAddress).getDetails();
-            (bool success,) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails calldata)", flightDetails));
+            (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails calldata)", flightDetails));
             if (success) {
                 ticketData.status = SharedStructs.TicketStatuses.Settled;
-                message = "Accounts settled successfully.";
+                message = string(abi.encodePacked(ticketData.agreementResult, "Accounts settled successfully"));
             } else {
-                message = "Error occured while settling the accounts.";
+                assembly {
+                    revert(add(32, returndata), mload(returndata))
+                }
             }
         }
 
@@ -88,5 +90,13 @@ contract Ticket is TicketInterface {
      */
     function getStatus() external override view returns (SharedStructs.TicketStatuses) {
         return ticketData.status;
+    }
+
+    /**
+     * @notice Returns the balance in Escrow account of the ticket
+     * @return Balance amount
+     */
+    function getBalance() external override view returns (uint256) {
+        return ticketData.escrowContractAddress.balance;
     }
 }
