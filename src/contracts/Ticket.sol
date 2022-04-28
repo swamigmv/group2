@@ -70,7 +70,7 @@ contract Ticket is TicketInterface {
 
         if (ticketData.ticketAgreementAddress != address(0)) {
             SharedStructs.FlightDetails memory flightDetails = FlightInterface(ticketData.flightAddress).getDetails();
-            (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails calldata)", flightDetails));
+            (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails memory)", flightDetails));
             if (success) {
                 ticketData.status = SharedStructs.TicketStatuses.Settled;
                 message = string(abi.encodePacked(ticketData.agreementResult, "Accounts settled successfully"));
