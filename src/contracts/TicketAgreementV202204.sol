@@ -14,13 +14,15 @@ contract TicketAgreementV202204 is TicketAgreementBase {
     /**
      * @notice Calcualtes the penalty amount for the associated ticket
      * @param flightDetails - Flight's latest details
+     * @return Flag indcating if the settle process for the ticket should be halted
      * @return Amount to charge
      * @return Summary of the operation
      */
-    function calculateCharge(SharedStructs.FlightDetails memory flightDetails) internal override view returns(uint256, string memory) {
+    function calculateCharge(SharedStructs.FlightDetails memory flightDetails) internal override view returns(bool, uint256, string memory) {
         
         string memory message;
         uint256 chargeAmount;
+        bool halt = false;
 
         // If ticket status is settled, then return existing penalty amount
         if (ticketData.status == SharedStructs.TicketStatuses.Settled) {
@@ -64,10 +66,20 @@ contract TicketAgreementV202204 is TicketAgreementBase {
 
         } else {
             // If ticket is open, then depending on flight's status and departure time calculate the charge
-
             if (flightDetails.status == SharedStructs.FlightStatuses.Cancelled) {
                 // If flight is cancelled then no charge
                 chargeAmount = 0;
+            } else if (flightDetails.status != SharedStructs.FlightStatuses.InTransit && flightDetails.status != SharedStructs.FlightStatuses.InTransit) {
+                // Check if the flight is departed but it's status is not updated
+                uint256 dateTimeNow = SharedFuncs.getCurrentDateTime();
+                if ((flightDetails.actualDepartureDateTime - dateTimeNow) > 2 hours) {
+                    // No updates are done in the flight status until 2 hours after departure then charge no amount
+                    chargeAmount = 0;
+                } else {
+                    // Ticket cannot be settle as of now
+                    message = "The ticket can be settled after 2 hours of departure";
+                    halt = true;
+                }
             } else {
                 // If flight is not cancelled then charge depending on the difference between actual departure and 
                 // original scheduled departure
@@ -98,7 +110,7 @@ contract TicketAgreementV202204 is TicketAgreementBase {
             }
         }
 
-        return (chargeAmount, message);
+        return (halt, chargeAmount, message);
 
     }
 

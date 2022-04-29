@@ -48,7 +48,7 @@ contract Airline is AirlineInterface {
       else {
          message = "Flight is already added";
       }
-
+      emit AddFlightResult(flightAddress, message);
       return (flightAddress, message);
    }
 
@@ -74,7 +74,7 @@ contract Airline is AirlineInterface {
       } else {
          message = "Flight not found";
       }
-
+      emit UpdateFlightResult(flightAddress, uint8(flightStatus), message);
       return (flightAddress, flightStatus, message);
    }
 
@@ -99,7 +99,7 @@ contract Airline is AirlineInterface {
          numberOfTickets = 0;
          message = "Flight not found";
       }
-
+      emit CancelFlightResult(flightAddress, numberOfTickets, message);
       return (flightAddress, numberOfTickets, message);
    }
 
@@ -124,7 +124,7 @@ contract Airline is AirlineInterface {
          numberOfTickets = 0;
          message = "Flight not found";
       }
-
+      emit CompleteFlightResult(flightAddress, numberOfTickets, message);
       return (flightAddress, numberOfTickets, message);
    }
 

@@ -25,4 +25,10 @@ interface TicketInterface {
      * @return Status of the ticket
      */
     function getStatus() external returns (SharedStructs.TicketStatuses);
+
+    /**
+     * @notice Returns the balance in Escrow account of the ticket
+     * @return Balance amount
+     */
+    function getBalance() external returns (uint256);
 }

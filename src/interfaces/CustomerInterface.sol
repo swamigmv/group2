@@ -8,6 +8,14 @@ import "../libraries/SharedStructs.sol";
  * @title Interface for customer contract.
  */
 interface CustomerInterface {
+    
+    /**
+    * @notice Event is raised to return buyTicket result to Web3 client
+    * @return ticketAddress - Address of the ticket booked
+    * @return ticketNumber - Number of the booked ticket
+    * @return log - Log of the execution
+    */
+    event BuyTicketResult(address ticketAddress, uint16 ticketNumber, string log);
 
     /**
     * @notice Allows a customer to buy a ticket for the flight
@@ -23,11 +31,33 @@ interface CustomerInterface {
         external payable returns (address, uint16, string memory);
 
     /**
+    * @notice Gets the ticket for the flight
+    * @param flightNumber - Flight number for which ticket address to be fetch
+    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external view returns (address, string memory);
+
+    /**
+    * @notice Event is raised to return cancelTicket result to Web3 client
+    * @return log - Log of the execution
+    */
+    event CancelTicketResult(string log);
+
+    /**
     * @notice Allows a customer to cancel the ticket
     * @param ticketAddress - Address of the ticket to be cancelled
     * @return Message giving the summary the execution
     */
     function cancelTicket(address ticketAddress) external returns (string memory);
+
+    /**
+    * @notice Event is raised to return settleTicket result to Web3 client
+    * @return log - Log of the execution
+    */
+    event SettleTicketResult(string log);
 
     /**
     * @notice Allows a customer to settle the ticket

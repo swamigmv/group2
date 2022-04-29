@@ -8,7 +8,10 @@ import "../libraries/SharedStructs.sol";
  * @title Interface specifying the methods exposed by Airline contract
  */
 interface AirlineInterface {
-    
+
+
+    event AddFlightResult(address flightAddress, string message);
+      
     /**
     * @notice Adds a flight details in the contract, so that it will be available for the transctions
     * @param flightNumber - Flight number
@@ -21,6 +24,7 @@ interface AirlineInterface {
     function addFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 chargePerSeat) 
     external returns (address, string calldata);
 
+    event UpdateFlightResult(address flightAddress, uint8 flightStatus, string message);
     /**
     * @notice Updates flight departure date time
     * @param flightNumber - Flight number
@@ -28,9 +32,12 @@ interface AirlineInterface {
     * @param newDepartureDateTime - New departure date time of the flight
     * @return Message giving the summary the execution
     */
+    
     function updateFlightDeparture(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 newDepartureDateTime) 
     external returns (address, SharedStructs.FlightStatuses, string memory);
 
+
+    event CancelFlightResult(address flightAddress, uint16 noOfTickets, string message);
     /**
     * @notice Cancels the flight
     * @param flightNumber - Flight number
@@ -41,6 +48,7 @@ interface AirlineInterface {
     */
     function cancelFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external returns (address, uint16, string memory);
 
+    event CompleteFlightResult(address flightAddress, uint16 noOfTickets, string message);
     /**
     * @notice Marks the flight as completed
     * @param flightNumber - Flight number

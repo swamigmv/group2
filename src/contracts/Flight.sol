@@ -69,12 +69,27 @@ contract Flight is FlightInterface {
             tickets.push(ticket);
             ticketNumber = nextTicketNumber;
             ticketAddress = payable(address(ticket));
-            message = "Ticket booked successfully";
+            message = string(abi.encodePacked("Ticket booked successfully. ", SharedFuncs.uintToString(ticket.getBalance()), " wei transferred to ticket escrow account"));
             availableCapacity -= numberOfSeatsRequired;
 
         }
 
         return (ticketNumber, ticketAddress, message);
+    }
+
+    /**
+    * @notice Gets the ticket for the flight
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    * @return Message giving the summary the execution
+    */
+    function getTicketAddress(uint16 ticketNumber) external override view returns (address, string memory) {
+        address ticketAddress = address(0);
+        string memory message;
+
+        ticketAddress = address(tickets[ticketNumber - 1]);
+        message = "Ticket found";
+        return (ticketAddress, message);
     }
 
     /**

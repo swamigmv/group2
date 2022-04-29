@@ -53,8 +53,33 @@ contract Customer is CustomerInterface {
             (ticketNumber, ticketAddress, message) = flight.bookTicket{value: msg.value}(buyer, numberOfSeats, ticketAgreementAddress);
         }
 
+        emit BuyTicketResult(ticketAddress, ticketNumber, message);
+
         return (ticketAddress, ticketNumber, message);
 
+    }
+
+    /**
+    * @notice Gets the ticket for the flight
+    * @param flightNumber - Flight number for which ticket address to be fetch
+    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
+    * @param ticketNumber - Ticket number for which address to be fetch
+    * @return Ticket address
+    */
+    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external override view returns (address, string memory) {
+        string memory message;
+        address ticketAddress = address(0);
+        (address payable flightAddress,) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
+
+        // Confirm that flight is found.
+        if (flightAddress == address(0)) {
+            message = "Specified flight is not available.";
+        } else {
+            FlightInterface flight = FlightInterface(flightAddress);
+            (ticketAddress, message) = flight.getTicketAddress(ticketNumber);
+        }
+
+        return (ticketAddress, message);
     }
 
     /**
@@ -64,7 +89,11 @@ contract Customer is CustomerInterface {
     */
     function cancelTicket(address ticketAddress) external override returns (string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
-        return ticket.cancel();
+        string memory message = ticket.cancel();
+
+        emit CancelTicketResult(message);
+
+        return message;
     }
 
     /**
@@ -74,7 +103,11 @@ contract Customer is CustomerInterface {
     */
     function settleTicket(address ticketAddress) external override returns (string memory) {
         TicketInterface ticket = TicketInterface(ticketAddress);
-        return ticket.settleAccounts();
+        string memory message = ticket.settleAccounts();
+
+        emit SettleTicketResult(message);
+
+        return message;
     }
 
     /**
