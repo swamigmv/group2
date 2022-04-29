@@ -39,16 +39,18 @@ interface FlightInterface {
     * @notice Updates the depature time of the flight
     * @param newDepartureDateTime - New departure date time of the flight
     * @return Status of the flight depending on the new departure date time
-    * @return Message giving the summary the execution
-    */
-    function updateDeparture(uint256 newDepartureDateTime) external returns (SharedStructs.FlightStatuses, string memory);
-
-    /**
-    * @notice Marks the flight as complete
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function complete() external returns (uint16, string memory);
+    function updateDeparture(uint256 newDepartureDateTime) external returns (SharedStructs.FlightStatuses, uint16, string memory);
+
+    /**
+    * @notice Marks the flight as complete
+    * @param actualDepartureDateTime - Actual departure date time of the flight
+    * @return Number of tickets settled
+    * @return Message giving the summary the execution
+    */
+    function complete(uint256 actualDepartureDateTime) external returns (uint16, string memory);
 
     /**
     * @notice Gets the flight details
