@@ -48,9 +48,9 @@ interface AirlineInterface {
     */
     function cancelFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external returns (address, uint16, string memory);
 
-    event CompleteFlightResult(address flightAddress, uint16 noOfTickets, string message);
+    event DepartFlightResult(address flightAddress, uint16 noOfTickets, string message);
     /**
-    * @notice Marks the flight as completed
+    * @notice Marks the flight as departed
     * @param flightNumber - Flight number
     * @param originalDepartureDateTime - Original departure date time of the flight
     * @param actualDepartureDateTime - Actual departure date time of the flight
@@ -58,7 +58,7 @@ interface AirlineInterface {
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function completeFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 actualDepartureDateTime) external returns (address, uint16, string memory);
+    function departFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 actualDepartureDateTime) external returns (address, uint16, string memory);
 
     /**
     * @notice Sets the ticket agreement contract to be used for new tickets

@@ -106,7 +106,7 @@ contract Airline is AirlineInterface {
    }
 
    /**
-    * @notice Marks the flight as completed
+    * @notice Marks the flight as departed
     * @param flightNumber - Flight number
     * @param originalDepartureDateTime - Original departure date time of the flight
     * @param originalDepartureDateTime - Actual departure date time of the flight
@@ -114,7 +114,7 @@ contract Airline is AirlineInterface {
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-   function completeFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 actualDepartureDateTime) external override 
+   function departFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 actualDepartureDateTime) external override 
    returns (address, uint16, string memory) {
 
       address flightAddress = flights[originalDepartureDateTime][flightNumber];
@@ -123,12 +123,12 @@ contract Airline is AirlineInterface {
 
       if (flightAddress != address(0)) {
          FlightInterface flight = FlightInterface(flightAddress);
-         (numberOfTickets, message) = flight.complete(actualDepartureDateTime);
+         (numberOfTickets, message) = flight.departed(actualDepartureDateTime);
       } else {
          numberOfTickets = 0;
          message = "Flight not found";
       }
-      emit CompleteFlightResult(flightAddress, numberOfTickets, message);
+      emit DepartFlightResult(flightAddress, numberOfTickets, message);
       return (flightAddress, numberOfTickets, message);
    }
 

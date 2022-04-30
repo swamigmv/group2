@@ -30,8 +30,7 @@ interface CustomerInterface {
     function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) 
         external payable returns (address, uint16, string memory);
 
-    function getTicket(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external view returns (SharedStructs.TicketInfo memory info, 
-    string memory message);
+    function getTicket(address ticketAddress) external view returns (SharedStructs.TicketInfo memory info);
 
     /**
     * @notice Event is raised to return cancelTicket result to Web3 client

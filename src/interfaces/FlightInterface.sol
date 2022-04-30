@@ -45,12 +45,12 @@ interface FlightInterface {
     function updateDeparture(uint256 newDepartureDateTime) external returns (SharedStructs.FlightStatuses, uint16, string memory);
 
     /**
-    * @notice Marks the flight as complete
+    * @notice Marks the flight as departed
     * @param actualDepartureDateTime - Actual departure date time of the flight
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function complete(uint256 actualDepartureDateTime) external returns (uint16, string memory);
+    function departed(uint256 actualDepartureDateTime) external returns (uint16, string memory);
 
     /**
     * @notice Gets the flight details
