@@ -73,4 +73,8 @@ interface CustomerInterface {
     */
     function setAirline(address airlineAddress) external returns (bool);
 
+
+    function getBalance(address custAddress) external returns (address ticketAddress, uint256 balance);
+
+    event GetBalanceResult(address ticketAddress, uint256 balance);
 }

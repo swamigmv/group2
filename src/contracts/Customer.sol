@@ -127,4 +127,10 @@ contract Customer is CustomerInterface {
         require(tx.origin == ownerAddress, "You are not allowed to perform this operation");
         _;
     }
+	
+	function getBalance(address custAddress) external override returns (address ticketAddress, uint256 balance) {
+        string memory message = "balance is ";
+        emit GetBalanceResult(custAddress, custAddress.balance);
+        return (custAddress, custAddress.balance);
+    }
 }
