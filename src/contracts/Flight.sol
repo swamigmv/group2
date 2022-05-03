@@ -63,7 +63,7 @@ contract Flight is FlightInterface {
             uint256 billedAmount = numberOfSeatsRequired * amountPerSeat;
             
             // Check balance of buyer's wallet. If insufficient then raise error otherwise deduct from buyer's wallet.
-            require(buyer.buyerAddress.balance >= billedAmount, "Insufficient balance in buyer's account");
+            require(msg.value == billedAmount, string(abi.encodePacked(SharedFuncs.uintToString(billedAmount), " wei required to book the ticket. Please use exact amount to book the ticket")));
 
             Ticket ticket = new Ticket{value: billedAmount}(address(this), ++nextTicketNumber, buyer, numberOfSeatsRequired, billedAmount, ticketAgreementAddress);
             tickets.push(ticket);
@@ -102,8 +102,8 @@ contract Flight is FlightInterface {
         uint16 numberOfTickets;
         string memory message;
 
-        if (flightDetails.status == SharedStructs.FlightStatuses.InTransit || flightDetails.status == SharedStructs.FlightStatuses.Completed) { 
-            message = "Flight is either in transit or completed. Hence cannot be cancelled";
+        if (flightDetails.status == SharedStructs.FlightStatuses.Departed) { 
+            message = "Flight is departed. Hence cannot be cancelled";
             numberOfTickets = 0;
         } else {
             // Update flight status first so that it will be reflected in the processing.
@@ -123,11 +123,13 @@ contract Flight is FlightInterface {
     * @notice Updates the depature time of the flight
     * @param newDepartureDateTime - New departure date time of the flight
     * @return Status of the flight depending on the new departure date time
+    * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function updateDeparture(uint256 newDepartureDateTime) external override returns (SharedStructs.FlightStatuses, string memory) {
+    function updateDeparture(uint256 newDepartureDateTime) external override returns (SharedStructs.FlightStatuses, uint16, string memory) {
 
         string memory message;
+        uint16 numberOfTickets = 0;
 
         if (flightDetails.status != SharedStructs.FlightStatuses.OnTime && flightDetails.status != SharedStructs.FlightStatuses.Delayed) {
             message = "Departure update for this flight is not allowed as it is either departed or cancelled";
@@ -137,7 +139,7 @@ contract Flight is FlightInterface {
             // Check the new departure time. Depending on that update the flight status.
             if (newDepartureDateTime >= SharedFuncs.getCurrentDateTime())
             {
-                flightDetails.status = SharedStructs.FlightStatuses.InTransit;
+                (numberOfTickets, message) = this.departed(newDepartureDateTime);
             } else if (flightDetails.originalDepartureDateTime < newDepartureDateTime) {
                 flightDetails.status = SharedStructs.FlightStatuses.Delayed;
             } else {
@@ -145,27 +147,32 @@ contract Flight is FlightInterface {
                 message = "Flight is updated successfully";
             }
         }
-        return (flightDetails.status, message);
+        return (flightDetails.status, numberOfTickets, message);
     }
 
     /**
-    * @notice Marks the flight as complete
+    * @notice Marks the flight as departed and settles the tickets
+    * @param actualDepartureDateTime - Actual departure date time of the flight
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function complete() external override returns (uint16, string memory) {
+    function departed(uint256 actualDepartureDateTime) external override returns (uint16, string memory) {
 
         uint16 numberOfTickets;
         string memory message;
 
-        if (flightDetails.status != SharedStructs.FlightStatuses.InTransit) {
-            message =  "Flight must be in transit before completing it";
+        if (flightDetails.status != SharedStructs.FlightStatuses.Departed) {
+            message =  "Flight was already updated as departed";
+            numberOfTickets = 0;
+        } else if (actualDepartureDateTime > SharedFuncs.getCurrentDateTime()) {
+            message =  "Flight cannot be marked as departed before depature time lapsed";
             numberOfTickets = 0;
         } else {
             // Update flight status first so that it will be reflected in the processing.
-            flightDetails.status = SharedStructs.FlightStatuses.Completed;
+            flightDetails.status = SharedStructs.FlightStatuses.Departed;
 
             Ticket ticket;
+            uint16 settledTicketCount = 0;
 
             for(uint index = 0; index < tickets.length; index++) {
                 ticket = tickets[index];
@@ -173,10 +180,11 @@ contract Flight is FlightInterface {
                 {
                     // Settle only open ticket.
                     tickets[index].settleAccounts();
+                    settledTicketCount++;
                 }
             }
             message =  "Flight status is updated and tickets are settled";
-            numberOfTickets = uint16(tickets.length);
+            numberOfTickets = settledTicketCount;
         }
 
         return (numberOfTickets, message);

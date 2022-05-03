@@ -8,6 +8,7 @@ import "../libraries/SharedStructs.sol";
  * @title Interface for Ticket contract
  */
 interface TicketInterface {
+
     /**
      * @notice Cancels the ticket
      * @return Summary of the operation 
@@ -31,4 +32,6 @@ interface TicketInterface {
      * @return Balance amount
      */
     function getBalance() external returns (uint256);
+
+    function getInfo() external view returns (SharedStructs.TicketInfo memory info);
 }

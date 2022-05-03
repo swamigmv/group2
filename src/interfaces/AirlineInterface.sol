@@ -24,7 +24,8 @@ interface AirlineInterface {
     function addFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint16 seatingCapacity, uint256 chargePerSeat) 
     external returns (address, string calldata);
 
-    event UpdateFlightResult(address flightAddress, uint8 flightStatus, string message);
+    event UpdateFlightResult(address flightAddress, uint8 flightStatus, uint16 numberOfTickets, string message);
+
     /**
     * @notice Updates flight departure date time
     * @param flightNumber - Flight number
@@ -32,12 +33,11 @@ interface AirlineInterface {
     * @param newDepartureDateTime - New departure date time of the flight
     * @return Message giving the summary the execution
     */
-    
     function updateFlightDeparture(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 newDepartureDateTime) 
-    external returns (address, SharedStructs.FlightStatuses, string memory);
-
+    external returns (address, SharedStructs.FlightStatuses, uint16, string memory);
 
     event CancelFlightResult(address flightAddress, uint16 noOfTickets, string message);
+
     /**
     * @notice Cancels the flight
     * @param flightNumber - Flight number
@@ -48,16 +48,17 @@ interface AirlineInterface {
     */
     function cancelFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external returns (address, uint16, string memory);
 
-    event CompleteFlightResult(address flightAddress, uint16 noOfTickets, string message);
+    event DepartFlightResult(address flightAddress, uint16 noOfTickets, string message);
     /**
-    * @notice Marks the flight as completed
+    * @notice Marks the flight as departed
     * @param flightNumber - Flight number
     * @param originalDepartureDateTime - Original departure date time of the flight
+    * @param actualDepartureDateTime - Actual departure date time of the flight
     * @return Address of the flight contract updated
     * @return Number of tickets settled
     * @return Message giving the summary the execution
     */
-    function completeFlight(string calldata flightNumber, uint256 originalDepartureDateTime) external returns (address, uint16, string memory);
+    function departFlight(string calldata flightNumber, uint256 originalDepartureDateTime, uint256 actualDepartureDateTime) external returns (address, uint16, string memory);
 
     /**
     * @notice Sets the ticket agreement contract to be used for new tickets

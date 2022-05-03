@@ -59,27 +59,8 @@ contract Customer is CustomerInterface {
 
     }
 
-    /**
-    * @notice Gets the ticket for the flight
-    * @param flightNumber - Flight number for which ticket address to be fetch
-    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
-    * @param ticketNumber - Ticket number for which address to be fetch
-    * @return Ticket address
-    */
-    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external override view returns (address, string memory) {
-        string memory message;
-        address ticketAddress = address(0);
-        (address payable flightAddress,) = airline.getTicketBookingConfiguration(flightNumber, departureDateTime);
-
-        // Confirm that flight is found.
-        if (flightAddress == address(0)) {
-            message = "Specified flight is not available.";
-        } else {
-            FlightInterface flight = FlightInterface(flightAddress);
-            (ticketAddress, message) = flight.getTicketAddress(ticketNumber);
-        }
-
-        return (ticketAddress, message);
+    function getTicket(address ticketAddress) external override view returns (SharedStructs.TicketInfo memory info) {
+        info = TicketInterface(ticketAddress).getInfo();
     }
 
     /**
@@ -89,6 +70,8 @@ contract Customer is CustomerInterface {
     */
     function cancelTicket(address ticketAddress) external override returns (string memory){
         TicketInterface ticket = TicketInterface(ticketAddress);
+        SharedStructs.TicketInfo memory ticketInfo  = ticket.getInfo();
+        require(tx.origin == ticketInfo.buyerAddress, "Only buyer can perform this operation");
         string memory message = ticket.cancel();
 
         emit CancelTicketResult(message);
@@ -103,6 +86,8 @@ contract Customer is CustomerInterface {
     */
     function settleTicket(address ticketAddress) external override returns (string memory) {
         TicketInterface ticket = TicketInterface(ticketAddress);
+        SharedStructs.TicketInfo memory ticketInfo  = ticket.getInfo();
+        require(tx.origin == ticketInfo.buyerAddress, "Only buyer can perform this operation");
         string memory message = ticket.settleAccounts();
 
         emit SettleTicketResult(message);

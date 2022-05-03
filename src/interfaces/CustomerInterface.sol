@@ -8,7 +8,7 @@ import "../libraries/SharedStructs.sol";
  * @title Interface for customer contract.
  */
 interface CustomerInterface {
-    
+
     /**
     * @notice Event is raised to return buyTicket result to Web3 client
     * @return ticketAddress - Address of the ticket booked
@@ -30,15 +30,7 @@ interface CustomerInterface {
     function buyTicket(string calldata flightNumber, uint256 departureDateTime, string calldata buyerName, uint16 numberOfSeats) 
         external payable returns (address, uint16, string memory);
 
-    /**
-    * @notice Gets the ticket for the flight
-    * @param flightNumber - Flight number for which ticket address to be fetch
-    * @param departureDateTime - Departure time of the flight for which ticket address to be fetch
-    * @param ticketNumber - Ticket number for which address to be fetch
-    * @return Ticket address
-    * @return Message giving the summary the execution
-    */
-    function getTicketAddress(string calldata flightNumber, uint256 departureDateTime, uint16 ticketNumber) external view returns (address, string memory);
+    function getTicket(address ticketAddress) external view returns (SharedStructs.TicketInfo memory info);
 
     /**
     * @notice Event is raised to return cancelTicket result to Web3 client

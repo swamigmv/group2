@@ -13,8 +13,7 @@ library SharedStructs {
     enum FlightStatuses {
         OnTime,
         Delayed,
-        InTransit,
-        Completed,
+        Departed,
         Cancelled
     }
 
@@ -64,4 +63,19 @@ library SharedStructs {
         uint256 paidToAirline;
     }
     
+            
+    struct TicketInfo {
+        address ticketAddress;
+        uint16 ticketNumber;
+        string travellerName;
+        address buyerAddress;
+        uint16 numberOfSeatsBooked;
+        uint256 ticketAmount;
+        SharedStructs.TicketStatuses ticketStatus; 
+        uint256 cancellationDateTime;
+        string settleAccountResult;
+        uint256 amountPaidToCustomer;
+        uint256 amountPaidToAireline;
+    }
+
 }

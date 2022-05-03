@@ -53,10 +53,15 @@ abstract contract TicketAgreementBase {
     
     /**
      * @notice Settles the account for the associated ticket
-     * @param flightDetails - Latest details of the flight
      */
-    function settleAccounts(SharedStructs.FlightDetails memory flightDetails) external virtual {
-        if (ticketData.status != SharedStructs.TicketStatuses.Settled) {        
+    function settleAccounts() external virtual {
+        if (ticketData.status != SharedStructs.TicketStatuses.Settled) {
+            // Get flight object
+            FlightInterface flight = FlightInterface(ticketData.flightAddress);
+
+            // Get flight's details
+            (SharedStructs.FlightDetails memory flightDetails) = flight.getDetails();
+
             (,,, string memory resultMessage) = settleTicketAccounts(flightDetails);
             if (bytes(resultMessage).length > 0) {
                 ticketData.agreementResult = string(abi.encodePacked(resultMessage, ". Ticket settled successfully"));
@@ -104,7 +109,7 @@ abstract contract TicketAgreementBase {
                 if (bytes(message).length > 0) {
                     message = string(abi.encodePacked(message, ". ", SharedFuncs.uintToString(refundAmount), " refunded to the customer"));
                 } else {
-                    message = "Amount refunded to the customer";
+                    message = string(abi.encodePacked(SharedFuncs.uintToString(refundAmount), " refunded to the customer"));
                 }
             }
 
@@ -116,7 +121,7 @@ abstract contract TicketAgreementBase {
                 if (bytes(message).length > 0) {
                     message = string(abi.encodePacked(message, ". ", SharedFuncs.uintToString(chargeAmount), " paid to the airline"));
                 } else {
-                    message = "Amount paid to the airline";
+                    message = string(abi.encodePacked(SharedFuncs.uintToString(chargeAmount), " paid to the airline"));
                 }
             }
 

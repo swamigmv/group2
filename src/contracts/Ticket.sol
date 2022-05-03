@@ -69,11 +69,10 @@ contract Ticket is TicketInterface {
         string memory message;
 
         if (ticketData.ticketAgreementAddress != address(0)) {
-            SharedStructs.FlightDetails memory flightDetails = FlightInterface(ticketData.flightAddress).getDetails();
-            (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts(SharedStructs.FlightDetails memory)", flightDetails));
+            (bool success, bytes memory returndata) = ticketData.ticketAgreementAddress.delegatecall(abi.encodeWithSignature("settleAccounts()"));
             if (success) {
                 ticketData.status = SharedStructs.TicketStatuses.Settled;
-                message = string(abi.encodePacked(ticketData.agreementResult, "Accounts settled successfully"));
+                message = ticketData.agreementResult;
             } else {
                 assembly {
                     revert(add(32, returndata), mload(returndata))
@@ -98,5 +97,10 @@ contract Ticket is TicketInterface {
      */
     function getBalance() external override view returns (uint256) {
         return ticketData.escrowContractAddress.balance;
+    }
+
+    function getInfo() external override view returns (SharedStructs.TicketInfo memory info) {
+        info = SharedStructs.TicketInfo(address(this), ticketData.ticketNumber, ticketData.buyer.name, ticketData.buyer.buyerAddress, ticketData.numberOfSeats,
+        ticketData.amount, ticketData.status, ticketData.cancelledDateTime, ticketData.agreementResult, ticketData.paidToCustomer, ticketData.paidToAirline);
     }
 }

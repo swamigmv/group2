@@ -69,10 +69,10 @@ contract TicketAgreementV202204 is TicketAgreementBase {
             if (flightDetails.status == SharedStructs.FlightStatuses.Cancelled) {
                 // If flight is cancelled then no charge
                 chargeAmount = 0;
-            } else if (flightDetails.status != SharedStructs.FlightStatuses.InTransit && flightDetails.status != SharedStructs.FlightStatuses.InTransit) {
+            } else if (flightDetails.status != SharedStructs.FlightStatuses.Departed) {
                 // Check if the flight is departed but it's status is not updated
                 uint256 dateTimeNow = SharedFuncs.getCurrentDateTime();
-                if ((flightDetails.actualDepartureDateTime - dateTimeNow) > 2 hours) {
+                if (dateTimeNow > flightDetails.actualDepartureDateTime && (dateTimeNow - flightDetails.actualDepartureDateTime) > 2 hours) {
                     // No updates are done in the flight status until 2 hours after departure then charge no amount
                     chargeAmount = 0;
                 } else {
