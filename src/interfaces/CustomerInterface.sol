@@ -65,8 +65,17 @@ interface CustomerInterface {
     */
     function setAirline(address airlineAddress) external returns (bool);
 
-
+    /**
+    * Gets balance of input account
+    * @param custAddress - Address for which balance is needed
+    * @return ticketAddress balance of the account
+    */
     function getBalance(address custAddress) external returns (address ticketAddress, uint256 balance);
 
+    /**
+    * Event is raised to return balance of account to Web3 client
+    * @return log - Log of the execution
+    */
     event GetBalanceResult(address ticketAddress, uint256 balance);
+
 }
