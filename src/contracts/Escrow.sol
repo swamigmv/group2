@@ -4,18 +4,22 @@ pragma solidity >=0.8.6 < 0.9.0;
 
 import "../libraries/SharedStructs.sol";
 import "../interfaces/EscrowInterface.sol";
+import "../interfaces/AirlineInterface.sol";
 
 /**
  * @title Contract for Escrow
  */
 contract Escrow is EscrowInterface {
 
-    address selfAddress;    
+    address payable customerAddress;
+    AirlineInterface airline;    
 
     /**
      * @notice Creates an instance of Escrow contract
      */
-    constructor() payable {
+    constructor(address payable customer, AirlineInterface airlineContract) payable {
+        customerAddress = customer;
+        airline = airlineContract;
     }
 
     /**
@@ -26,16 +30,19 @@ contract Escrow is EscrowInterface {
     }
 
     /**
-     * @notice Deposits the amount into the Escrow account
+     * @notice Pays amount to customer account
+     * @param amount - Amount to be paid to the customer
      */
-    function deposit() external override payable {
+    function payToCustomer(uint256 amount) external override payable {
+        customerAddress.transfer(amount);
     }
 
     /**
-     * @notice Withdraws the amount from the Escrow account
+     * @notice Pays amount to airline account
+     * @param amount - Amount to be paid to the airline
      */
-    function withdraw(address payable payTo, uint256 amount) payable external override {
-        payTo.transfer(amount);
+    function payToAirline(uint256 amount) external override payable {
+        airline.getWallet().transfer(amount);
     }
 
 }

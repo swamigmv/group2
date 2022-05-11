@@ -26,6 +26,7 @@ contract Ticket is TicketInterface {
      */
     constructor (address flightAddress, uint16 ticketNumber, SharedStructs.Buyer memory buyer, uint16 numberOfSeats, uint256 amount, 
     address ticketAgreementAddress) payable {
+        FlightInterface flight = FlightInterface(flightAddress);
         ticketData.flightAddress = flightAddress;
         ticketData.ticketNumber = ticketNumber;
         ticketData.buyer.name = buyer.name;
@@ -33,7 +34,7 @@ contract Ticket is TicketInterface {
         ticketData.numberOfSeats = numberOfSeats;
         ticketData.amount = amount;
         ticketData.ticketAgreementAddress = ticketAgreementAddress;
-        Escrow escrow = new Escrow{value: amount}();
+        Escrow escrow = new Escrow{value: amount}(buyer.buyerAddress, AirlineInterface(flight.getDetails().airlineAddress));
         ticketData.escrowContractAddress = payable(address(escrow));
     }
 

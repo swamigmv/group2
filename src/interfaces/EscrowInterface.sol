@@ -16,13 +16,15 @@ interface EscrowInterface {
     function getWallet() external returns (address payable);
 
     /**
-     * @notice Deposits the amount into the Escrow account
+     * @notice Pays amount to customer account
+     * @param amount - Amount to be paid to the customer
      */
-    function deposit() external payable;
+    function payToCustomer(uint256 amount) external payable;
 
     /**
-     * @notice Withdraws the amount from the Escrow account
+     * @notice Pays amount to airline account
+     * @param amount - Amount to be paid to the airline
      */
-    function withdraw(address payable payTo, uint256 amount) payable external;
+    function payToAirline(uint256 amount) payable external;
 
 }
